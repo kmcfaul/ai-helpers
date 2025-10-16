@@ -10,10 +10,6 @@ import {
   ToolbarGroup,
   ToolbarItem,
   Button,
-  Drawer,
-  DrawerContent,
-  DrawerContentBody,
-  DrawerPanelContent,
   DrawerHead,
   DrawerActions,
   DrawerCloseButton,
@@ -31,7 +27,7 @@ export const CompassDashboard: React.FunctionComponent = () => {
   };
 
   const drawerContent = (
-    <DrawerPanelContent>
+    <>
       <DrawerHead>
         <span>Dashboard Details</span>
         <DrawerActions>
@@ -47,54 +43,50 @@ export const CompassDashboard: React.FunctionComponent = () => {
           You can add charts, metrics, or other dashboard components here.
         </Content>
       </DrawerPanelBody>
-    </DrawerPanelContent>
+    </>
   );
 
   return (
     <Fragment>
-      <Drawer isExpanded={isDrawerOpen}>
-        <DrawerContent panelContent={drawerContent}>
-          <DrawerContentBody>
-            <Page
-              id="pf-compass-center"
-              className="pf-m-no-sidebar pf-m-plain"
-              isContentFilled
-            >
-              <PageSection>
-                <Flex alignItems={{ default: "alignItemsCenter" }}>
-                  <FlexItem grow={{ default: "grow" }}>
-                    <Title headingLevel="h1">Dashboard</Title>
-                  </FlexItem>
-                  <FlexItem>
-                    <Toolbar hasNoPadding>
-                      <ToolbarContent>
-                        <ToolbarGroup>
-                          <ToolbarItem>
-                            <Button
-                              icon={<BarsIcon />}
-                              variant="plain"
-                              onClick={onDrawerToggle}
-                              aria-label="Toggle drawer"
-                            >
-                              Details
-                            </Button>
-                          </ToolbarItem>
-                        </ToolbarGroup>
-                        <ToolbarGroup>
-                          <ToolbarItem>
-                            <Button icon={<EllipsisVIcon />} variant="plain" />
-                          </ToolbarItem>
-                        </ToolbarGroup>
-                      </ToolbarContent>
-                    </Toolbar>
-                  </FlexItem>
-                </Flex>
-              </PageSection>
-              <PageSection>Content section</PageSection>
-            </Page>
-          </DrawerContentBody>
-        </DrawerContent>
-      </Drawer>
+      <Page
+        id="pf-compass-center"
+        className="pf-m-no-sidebar pf-m-plain"
+        isContentFilled
+        notificationDrawer={drawerContent}
+        isNotificationDrawerExpanded={isDrawerOpen}
+      >
+        <PageSection>
+          <Flex alignItems={{ default: "alignItemsCenter" }}>
+            <FlexItem grow={{ default: "grow" }}>
+              <Title headingLevel="h1">Dashboard</Title>
+            </FlexItem>
+            <FlexItem>
+              <Toolbar hasNoPadding>
+                <ToolbarContent>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Button
+                        icon={<BarsIcon />}
+                        variant="plain"
+                        onClick={onDrawerToggle}
+                        aria-label="Toggle drawer"
+                      >
+                        Details
+                      </Button>
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Button icon={<EllipsisVIcon />} variant="plain" />
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                </ToolbarContent>
+              </Toolbar>
+            </FlexItem>
+          </Flex>
+        </PageSection>
+        <PageSection>Content section</PageSection>
+      </Page>
     </Fragment>
   );
 };
