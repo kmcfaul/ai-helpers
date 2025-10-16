@@ -75,8 +75,10 @@ export const Compass: React.FunctionComponent = () => {
           isExpanded={isDropdownOpen}
           variant="plain"
         >
-          Ned Username
-          <Avatar src={imgAvatar} alt="" size="md" />
+          <Flex alignItems={{ default: 'alignItemsCenter' }} gap={{ default: 'gapMd' }}>
+            Ned Username
+            <Avatar src={imgAvatar} alt="" size="md" />
+          </Flex>
         </MenuToggle>
       )}
     >

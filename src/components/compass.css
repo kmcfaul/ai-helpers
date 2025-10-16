@@ -157,6 +157,11 @@
   --pf-v6-c-table--BackgroundColor: transparent;
 }
 
+.pf-v6-c-avatar {
+  --pf-v6-c-avatar--m-md--Height: 48px;
+  --pf-v6-c-avatar--m-md--Width: 48px;
+}
+
 .pf-chatbot__message-bar {
   width: 100%;
   min-width: var(--compass--message-bar--min-width);
