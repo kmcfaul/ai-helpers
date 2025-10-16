@@ -195,5 +195,14 @@ body {
   background-image: url(../assets/rh-wallpaper-dark.png);
 }
 
+:where(:root.no-glass) .compass {
+  --compass--glass--background-filter: revert;
+  --compass--glass--opacity: 100%;
+
+  .pf-v6-c-tabs.pf-m-subtab {
+    --compass--glass--bgcolor: var(--pf-t--global--background--color--secondary--default);
+  }
+}
+
 :root {
 }
