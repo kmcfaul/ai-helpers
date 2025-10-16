@@ -123,6 +123,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
                   | undefined
               }
               isCompact
+              variant="outline"
             >
               {statusText}
             </Label>
@@ -246,6 +247,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
                             | undefined
                         }
                         isCompact
+                        variant="outline"
                       >
                         {product.statusText}
                       </Label>

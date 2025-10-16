@@ -5,12 +5,14 @@
   --compass--column-gap: var(--pf-t--global--spacer--xl);
   --compass--nav--row-gap: var(--pf-t--global--spacer--md);
   --compass--main--row-gap: var(--pf-t--global--spacer--md);
-  --compass--glass--background-filter: blur(40px);
+  --compass--glass--background-filter: blur(32px);
   --compass--glass--border: var(--pf-t--global--border--color--alt);
   --compass--glass--bgcolor: var(--pf-t--global--background--color--primary--default);
-  --compass--glass--opacity: 50%;
+  --compass--glass--opacity: 20%;
   --compass--message-bar--min-width: 300px;
   --compass--message-bar--max-width: 600px;
+  /* --compass--glass--bg--blend--light: lighten;
+  --compass--glass--bg--blend--dark: darken; */
 
   padding: var(--compass--padding);
   display: grid;
@@ -121,22 +123,15 @@
   background: color-mix(in srgb, var(--compass--glass--bgcolor) var(--compass--glass--opacity), transparent);
   backdrop-filter: var(--compass--glass--background-filter);
   border: 1px solid var(--compass--glass--border);
+  /* background-blend-mode: light-dark(var(--compass--glass--bg--blend--light), var(--compass--glass--bg--blend--dark)); */
 }
 
 .pf-v6-c-tabs {
   --pf-v6-c-tabs--link-accent--color: var(--pf-t--color--red--50);
   --pf-v6-c-tabs__link--disabled--BackgroundColor: transparent;
   --pf-v6-c-tabs__link--disabled--Color: var(--pf-t--global--text--color--disabled);
-  --pf-v6-c-tabs__item--PaddingBlockStart: 0px;
-  --pf-v6-c-tabs__item--PaddingBlockEnd: 0px;
-  --pf-v6-c-tabs__item--PaddingInlineStart: 0px;
-  --pf-v6-c-tabs__item--PaddingInlineEnd: 0px;
-  --pf-v6-c-tabs__link--PaddingBlockStart: var(--pf-t--global--spacer--md);
-  --pf-v6-c-tabs__link--PaddingBlockEnd: var(--pf-t--global--spacer--md);
-  --pf-v6-c-tabs__link--PaddingInlineStart: var(--pf-t--global--spacer--md);
-  --pf-v6-c-tabs__link--PaddingInlineEnd: var(--pf-t--global--spacer--md);
-  --pf-v6-c-tabs__link--hover--BackgroundColor: transparent;
   --pf-v6-c-tabs__link--hover--BorderColor: transparent;
+  --pf-v6-c-tabs__link--BorderRadius: var(--pf-t--global--border--radius--pill);
   
   &::before {
     border: 0;
