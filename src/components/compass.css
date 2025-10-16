@@ -27,9 +27,7 @@
   align-items: center;
   justify-content: center;
   height: 100dvh;
-  gap:
-    var(--compass--row-gap)
-    var(--compass--column-gap);
+  gap: var(--compass--row-gap) var(--compass--column-gap);
 }
 
 .compass__header {
@@ -55,6 +53,10 @@
   grid-area: panel-start;
   padding: var(--pf-t--global--spacer--sm);
   border-radius: var(--pf-t--global--border--radius--pill);
+
+  .pf-v6-c-button.pf-m-plain {
+    --pf-v6-c-button--FontSize: var(--pf-t--global--icon--size--font--lg);
+  }
 }
 
 .compass__main {
@@ -79,7 +81,8 @@
   border-radius: var(--pf-t--global--border--radius--pill);
 }
 
-.pf-v6-c-action-list.pf-m-vertical {
+.pf-v6-c-action-list.pf-m-vertical,
+.pf-v6-c-action-list.pf-m-vertical .pf-v6-c-action-list__group {
   flex-direction: column;
 }
 
@@ -98,9 +101,9 @@
   --pf-v6-c-page__main-section--PaddingBlockEnd: var(--pf-t--global--spacer--lg);
   --pf-v6-c-page__main-section--PaddingInlineStart: var(--pf-t--global--spacer--lg);
   --pf-v6-c-page__main-section--PaddingInlineEnd: var(--pf-t--global--spacer--lg);
-  
+
   height: 100%;
-  
+
   .pf-v6-c-page__main-section {
     border-radius: var(--pf-t--global--border--radius--large);
 
@@ -108,7 +111,7 @@
       flex-grow: 1;
     }
   }
-  
+
   .pf-v6-c-page__main {
     row-gap: var(--compass--main--row-gap);
   }
@@ -132,7 +135,7 @@
   --pf-v6-c-tabs__link--disabled--Color: var(--pf-t--global--text--color--disabled);
   --pf-v6-c-tabs__link--hover--BorderColor: transparent;
   --pf-v6-c-tabs__link--BorderRadius: var(--pf-t--global--border--radius--pill);
-  
+
   &::before {
     border: 0;
   }
@@ -174,19 +177,6 @@
   text-decoration-color: var(--pf-t--global--border--color--default);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 body {
   background-image: url(../assets/Wallpaper-light.png);
   background-size: cover;
@@ -207,6 +197,7 @@ body {
 :where(:root.no-glass) .compass {
   --compass--glass--background-filter: revert;
   --compass--glass--opacity: 100%;
+  --compass--glass--border: var(--pf-t--global--border--color--default);
 
   .pf-v6-c-tabs.pf-m-subtab {
     --compass--glass--bgcolor: var(--pf-t--global--background--color--secondary--default);
@@ -215,3 +206,14 @@ body {
 
 :root {
 }
+
+/*
+input gradient
+#F56E6E 0% > #876FD4 65% > #5E40BE 100%
+*/
+
+/*
+primary bg for inputs
+overlay filter for dark theme
+softlight in light theme
+*/
