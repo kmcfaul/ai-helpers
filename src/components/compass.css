@@ -1,22 +1,20 @@
-/* style API 
-  --compass--padding: padding around edges of viewport
-  --compass--max-width: overall layout max-width
-  --compass--row-gap: row gap for the compass layout between top, content, footer
-  --compass--column-gap: column gap between left toolbar, content, right toolbar
-  --compass--nav--gap: gap between primary and secondary nav
-  --compass--main--gap: gap between page sections in main area
-  --compass--glass--blur: amount of "blur" for glass effect
-  --compass--glass--border: border-color for the glass style boxes
-  --compass--glass--color: base background color for glass boxes
-  --compass--glass--opacity: opacity level for background color
-  --compass--message-bar--min-width: message bar min-width
-  --compass--message-bar--max-width: message bar max-width
-*/
-
 .compass {
-  padding: var(--compass--padding, var(--pf-t--global--spacer--xl));
+  --compass--padding: var(--pf-t--global--spacer--xl);
+  --compass--max-width: 1710px;
+  --compass--row-gap: var(--pf-t--global--spacer--xl);
+  --compass--column-gap: var(--pf-t--global--spacer--xl);
+  --compass--nav--row-gap: var(--pf-t--global--spacer--md);
+  --compass--main--row-gap: var(--pf-t--global--spacer--md);
+  --compass--glass--background-filter: blur(40px);
+  --compass--glass--border: var(--pf-t--color--gray--70);
+  --compass--glass--color: #000;
+  --compass--glass--opacity: 50%;
+  --compass--message-bar--min-width: 300px;
+  --compass--message-bar--max-width: 600px;
+
+  padding: var(--compass--padding);
   display: grid;
-  max-width: var(--compass--max-width, 1710px);
+  max-width: var(--compass--max-width);
   margin-inline: auto;
   grid-template-columns: auto 1fr auto;
   grid-template-rows: auto 1fr auto;
@@ -28,8 +26,8 @@
   justify-content: center;
   height: 100dvh;
   gap:
-    var(--compass--row-gap, var(--pf-t--global--spacer--xl))
-    var(--compass--column-gap, var(--pf-t--global--spacer--xl));
+    var(--compass--row-gap)
+    var(--compass--column-gap);
 }
 
 .compass__header {
@@ -48,7 +46,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--compass--nav--gap, var(--pf-t--global--spacer--md));
+  gap: var(--compass--nav--row-gap);
 }
 
 .compass__panel--start {
@@ -110,7 +108,7 @@
   }
   
   .pf-v6-c-page__main {
-    row-gap: var(--compass--main--gap, var(--pf-t--global--spacer--md));
+    row-gap: var(--compass--main--row-gap);
   }
 }
 
@@ -120,9 +118,9 @@
 .compass__panel--start,
 .compass__panel--end,
 .pf-v6-c-tabs {
-  background: color-mix(in srgb, var(--compass--glass--color, #000) var(--compass--glass--opacity, 50%), transparent);
-  backdrop-filter: blur(var(--compass--glass--blur, 40px));
-  border: 1px solid var(--compass--glass--border, var(--pf-t--color--gray--70));
+  background: color-mix(in srgb, var(--compass--glass--color) var(--compass--glass--opacity), transparent);
+  backdrop-filter: var(--compass--glass--background-filter);
+  border: 1px solid var(--compass--glass--border);
 }
 
 .pf-v6-c-tabs {
@@ -138,6 +136,7 @@
   --pf-v6-c-tabs__link--PaddingInlineStart: var(--pf-t--global--spacer--md);
   --pf-v6-c-tabs__link--PaddingInlineEnd: var(--pf-t--global--spacer--md);
   --pf-v6-c-tabs__link--hover--BackgroundColor: transparent;
+  --pf-v6-c-tabs__link--hover--BorderColor: transparent;
   
   &::before {
     border: 0;
@@ -165,8 +164,8 @@
 
 .pf-chatbot__message-bar {
   width: 100%;
-  min-width: var(--compass--message-bar--min-width, 300px);
-  max-width: var(--compass--message-bar--max-width, 600px);
+  min-width: var(--compass--message-bar--min-width);
+  max-width: var(--compass--message-bar--max-width);
 }
 
 body {
