@@ -1,5 +1,17 @@
 import { Fragment } from "react";
-import { Page, PageSection } from "@patternfly/react-core";
+import {
+  Page,
+  PageSection,
+  Flex,
+  FlexItem,
+  Title,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+  Button,
+} from "@patternfly/react-core";
+import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
 
 export const CompassAutomations: React.FunctionComponent = () => {
   return (
@@ -9,7 +21,25 @@ export const CompassAutomations: React.FunctionComponent = () => {
         className="pf-m-no-sidebar pf-m-plain"
         isContentFilled
       >
-        <PageSection>Title section: Automations</PageSection>
+        <PageSection>
+          <Flex alignItems={{ default: "alignItemsCenter" }}>
+            <FlexItem grow={{ default: "grow" }}>
+              <Title headingLevel="h1">Automations</Title>
+            </FlexItem>
+            <FlexItem>
+              <Toolbar hasNoPadding>
+                <ToolbarContent>
+                  <ToolbarGroup></ToolbarGroup>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Button icon={<EllipsisVIcon />} variant="plain" />
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                </ToolbarContent>
+              </Toolbar>
+            </FlexItem>
+          </Flex>
+        </PageSection>
         <PageSection>Content section</PageSection>
       </Page>
     </Fragment>
