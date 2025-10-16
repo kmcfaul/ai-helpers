@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, Fragment } from "react";
 import {
   Page,
   PageSection,
@@ -6,67 +6,240 @@ import {
   CardBody,
   CardTitle,
   CardHeader,
-  Grid,
-  GridItem,
   Button,
-  ButtonVariant,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+  SearchInput,
+  ToggleGroup,
+  ToggleGroupItem,
+  Gallery,
+  MenuToggle,
+  MenuToggleElement,
+  Dropdown,
+  Pagination,
+  Flex,
+  FlexItem,
+  Title,
 } from "@patternfly/react-core";
-import { PlusIcon } from "@patternfly/react-icons/dist/esm/icons/plus-icon";
+import { ActionsColumn } from "@patternfly/react-table";
+
+import { DataViewTable } from "@patternfly/react-data-view/dist/dynamic/DataViewTable";
+import { DataViewToolbar } from "@patternfly/react-data-view/dist/dynamic/DataViewToolbar";
+import { DataViewFilters } from "@patternfly/react-data-view/dist/dynamic/DataViewFilters";
+import { DataViewTextFilter } from "@patternfly/react-data-view/dist/dynamic/DataViewTextFilter";
+import ThIcon from "@patternfly/react-icons/dist/esm/icons/th-icon";
+import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
+import ListIcon from "@patternfly/react-icons/dist/esm/icons/list-icon";
 
 export const CompassIntegrations: React.FunctionComponent = () => {
+  const [integrationTableDisplay, setIntegrationTableDisplay] = useState(false);
   const integrations = [
     {
       id: 1,
-      name: "GitHub",
-      description: "Connect to GitHub repositories and manage pull requests",
+      name: "Ansible Automation Platform",
+      description:
+        "Ansible Automation Platform is an entrprise framework for building and operating IT automation at scale.",
       status: "Connected",
-      type: "Source Control",
+      type: "MCP Server",
+      url: "ansible.example.com",
     },
     {
       id: 2,
-      name: "Slack",
-      description: "Send notifications and updates to Slack channels",
-      status: "Connected",
-      type: "Communication",
+      name: "Github",
+      description:
+        "Github is a code hosting platform for version control and collaboration. ",
+      status: "Disconnected",
+      type: "Version Control",
+      url: "github.example.com",
     },
     {
       id: 3,
-      name: "Jira",
-      description: "Sync issues and track project progress",
-      status: "Disconnected",
-      type: "Project Management",
-    },
-    {
-      id: 4,
-      name: "AWS",
-      description: "Deploy and manage cloud infrastructure",
+      name: "Kubernetes Cluster",
+      description:
+        "A Kubernetes cluster is a set of node machines for running containerized applications.",
       status: "Connected",
-      type: "Cloud Platform",
+      type: "MCP Server",
+      url: "k8s.example.com",
     },
   ];
 
+  const rowActions = [
+    {
+      title: "Some action",
+      onClick: () => console.log("clicked on Some action"), // eslint-disable-line no-console
+    },
+    {
+      title: <div>Another action</div>,
+      onClick: () => console.log("clicked on Another action"), // eslint-disable-line no-console
+    },
+    {
+      isSeparator: true,
+    },
+    {
+      title: "Third action",
+      onClick: () => console.log("clicked on Third action"), // eslint-disable-line no-console
+    },
+  ];
+
+  const rows = integrations.map(({ name, type }) => [
+    name,
+    type,
+    {
+      cell: <ActionsColumn items={rowActions} />,
+      props: { isActionCell: true },
+    },
+  ]);
+
+  const columns = ["Name", "Type"];
+
+  const cardIntegration = (
+    <>
+      <Toolbar>
+        <ToolbarContent>
+          <ToolbarGroup>
+            <ToolbarItem>
+              <SearchInput aria-label="Integrations example search input" />
+            </ToolbarItem>
+          </ToolbarGroup>
+          <ToggleGroup>
+            <ToggleGroupItem
+              icon={<ThIcon />}
+              aria-label="grid icon button"
+              isSelected={!integrationTableDisplay}
+              onChange={() => {
+                console.log("clicked on grid icon button");
+                setIntegrationTableDisplay(false);
+              }}
+            ></ToggleGroupItem>
+            <ToggleGroupItem
+              icon={<ListIcon />}
+              aria-label="list icon button"
+              isSelected={integrationTableDisplay}
+              onChange={() => {
+                console.log("clicked on list icon button");
+                setIntegrationTableDisplay(true);
+              }}
+            ></ToggleGroupItem>
+          </ToggleGroup>
+        </ToolbarContent>
+      </Toolbar>
+      <Gallery hasGutter aria-label="Selectable card container">
+        {integrations.map((product) => (
+          <Card
+            isCompact
+            key={product.name}
+            id={product.name.replace(/ /g, "-")}
+          >
+            <CardHeader
+              actions={{
+                actions: (
+                  <>
+                    <Dropdown
+                      isOpen={false}
+                      onOpenChange={() => {}}
+                      toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
+                        <MenuToggle
+                          ref={toggleRef}
+                          aria-label={`${product.name} actions`}
+                          variant="plain"
+                          icon={<EllipsisVIcon />}
+                        />
+                      )}
+                      popperProps={{ position: "right" }}
+                    />
+                  </>
+                ),
+              }}
+            >
+              <CardTitle>{product.name}</CardTitle>
+            </CardHeader>
+            <CardBody>{product.description}</CardBody>
+          </Card>
+        ))}
+      </Gallery>
+    </>
+  );
+  const dataViewIntegration = (
+    <>
+      <DataViewToolbar
+        clearAllFilters={() => {}}
+        filters={
+          <DataViewFilters onChange={() => {}} values={{}}>
+            <DataViewTextFilter
+              filterId="name"
+              title="Name"
+              placeholder="Filter by name"
+            />
+            <DataViewTextFilter
+              filterId="branch"
+              title="Branch"
+              placeholder="Filter by branch"
+            />
+          </DataViewFilters>
+        }
+        actions={
+          <ToggleGroup>
+            <ToggleGroupItem
+              icon={<ThIcon />}
+              aria-label="grid icon button"
+              isSelected={!integrationTableDisplay}
+              onChange={() => setIntegrationTableDisplay(false)}
+            ></ToggleGroupItem>
+            <ToggleGroupItem
+              icon={<ListIcon />}
+              aria-label="list icon button"
+              isSelected={integrationTableDisplay}
+              onChange={() => setIntegrationTableDisplay(true)}
+            ></ToggleGroupItem>
+          </ToggleGroup>
+        }
+        pagination={<Pagination page={1} perPage={10} isCompact />}
+      />
+      <DataViewTable
+        aria-label="Integrations table"
+        columns={columns}
+        rows={rows}
+      />
+    </>
+  );
+
   return (
-    <Page id="pf-compass-center" className="pf-m-no-sidebar">
-      <PageSection>Test</PageSection>
-      <PageSection>
-        <div style={{ marginBottom: "1rem" }}>
-          <Button variant={ButtonVariant.primary} icon={<PlusIcon />}>
-            Add Integration
-          </Button>
-        </div>
-        <Grid hasGutter>
-          {integrations.map((integration) => (
-            <GridItem key={integration.id} span={6}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>{integration.name}</CardTitle>
-                </CardHeader>
-                <CardBody>test</CardBody>
-              </Card>
-            </GridItem>
-          ))}
-        </Grid>
-      </PageSection>
-    </Page>
+    <Fragment>
+      <Page
+        id="pf-compass-center"
+        className="pf-m-no-sidebar pf-m-plain"
+        isContentFilled
+      >
+        <PageSection>
+          <Flex alignItems={{ default: "alignItemsCenter" }}>
+            <FlexItem grow={{ default: "grow" }}>
+              <Title headingLevel="h1">Integrations</Title>
+            </FlexItem>
+            <FlexItem>
+              <Toolbar hasNoPadding>
+                <ToolbarContent>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Button variant="primary">Add integration</Button>
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                  <ToolbarGroup>
+                    <ToolbarItem>
+                      <Button icon={<EllipsisVIcon />} variant="plain" />
+                    </ToolbarItem>
+                  </ToolbarGroup>
+                </ToolbarContent>
+              </Toolbar>
+            </FlexItem>
+          </Flex>
+        </PageSection>
+        <PageSection>
+          {integrationTableDisplay && dataViewIntegration}
+          {!integrationTableDisplay && cardIntegration}
+        </PageSection>
+      </Page>
+    </Fragment>
   );
 };
