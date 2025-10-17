@@ -1,4 +1,4 @@
-import { useState, Fragment, useRef } from "react";
+import { useState, Fragment, useRef, useEffect } from "react";
 import {
   Page,
   PageSection,
@@ -65,6 +65,54 @@ const rhServerStackIcon = (
 
 export const CompassIntegrations: React.FunctionComponent = () => {
   const [activeDisplay, setActiveDisplay] = useState("grid");
+  const [scrollPosition, setScrollPosition] = useState<
+    "top" | "bottom" | "middle"
+  >("top");
+  const bodyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log("scroll detected");
+
+      const bodyElement = bodyRef.current;
+      if (!bodyElement) return;
+
+      const scrollTop = bodyElement.scrollTop;
+      const scrollHeight = bodyElement.scrollHeight;
+      const clientHeight = bodyElement.clientHeight;
+
+      console.log("Scroll values:", { scrollTop, scrollHeight, clientHeight });
+
+      // Check if at the top (within 10px threshold)
+      if (scrollTop <= 10) {
+        setScrollPosition("top");
+      }
+      // Check if at the bottom (within 10px threshold)
+      else if (scrollTop + clientHeight >= scrollHeight - 10) {
+        setScrollPosition("bottom");
+      }
+      // Otherwise in the middle
+      else {
+        setScrollPosition("middle");
+      }
+    };
+
+    // Listen only to the compass__body element scroll
+    const bodyElement = bodyRef.current;
+    if (bodyElement) {
+      bodyElement.addEventListener("scroll", handleScroll, { passive: true });
+    }
+
+    // Initial check
+    handleScroll();
+
+    // Cleanup
+    return () => {
+      if (bodyElement) {
+        bodyElement.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 
   const integrations = [
     {
@@ -768,7 +816,13 @@ export const CompassIntegrations: React.FunctionComponent = () => {
     <Fragment>
       <Page
         id="pf-compass-center"
-        className="pf-m-no-sidebar pf-m-plain"
+        className={`pf-m-no-sidebar pf-m-plain ${
+          scrollPosition === "top"
+            ? "compass__scroll-top"
+            : scrollPosition === "bottom"
+            ? "compass__scroll-bottom"
+            : ""
+        }`}
         isContentFilled
       >
         <div className="compass__toolbar">
@@ -782,7 +836,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
             })()}
           </PageSection>
         </div>
-        <div className="compass__body">
+        <div ref={bodyRef} className="compass__body">
           {(() => {
             if (activeDisplay === "add") {
               return <PageGroup>{addIntegration}</PageGroup>;
