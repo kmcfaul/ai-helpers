@@ -131,7 +131,7 @@ export const CompassDashboard: React.FunctionComponent = () => {
             id="pf-compass-center"
             className={`pf-m-no-sidebar pf-m-plain ${
               scrollPosition === "top"
-                ? "compass_scroll-top"
+                ? "compass__scroll-top"
                 : scrollPosition === "bottom"
                 ? "compass__scroll-bottom"
                 : ""
@@ -175,18 +175,18 @@ export const CompassDashboard: React.FunctionComponent = () => {
                 </Flex>
               </PageSection>
             </div>
-            <div ref={bodyRef} className="compass__body">
-              <Drawer isExpanded={isContentDrawerOpen}>
-                <DrawerContent panelContent={contentDrawerContent}>
+            <Drawer isExpanded={isContentDrawerOpen}>
+              <DrawerContent panelContent={contentDrawerContent}>
+                <div ref={bodyRef} className="compass__body">
                   <PageSection
                     aria-label="Detail status events"
                     className="pf-m-plain"
                   >
                     <AnimationsOverview />
                   </PageSection>
-                </DrawerContent>
-              </Drawer>
-            </div>
+                </div>
+              </DrawerContent>
+            </Drawer>
           </Page>
         </DrawerContent>
       </Drawer>
