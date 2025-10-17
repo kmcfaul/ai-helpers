@@ -89,25 +89,17 @@
   display: flex;
   flex-direction: column;
   border-radius: var(--pf-t--global--border--radius--large);
-  mask: linear-gradient(
+  /* mask: linear-gradient(
     rgba(0, 0, 0, calc(1 - var(--compass__scroll-top) / 20)),
     black var(--compass--feather--length),
     black calc(100% - var(--compass--feather--length)),
     rgba(0, 0, 0, calc(1 - var(--compass__scroll-bottom) / 20))
   );
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px); */
 
   > *:last-child {
     flex-grow: 1;
   }
-}
-
-.compass__scroll-top {
-  --compass--feather--scroll-top: black;
-}
-
-.compass__scroll-bottom {
-  --compass--feather--scroll-bottom: black;
 }
 
 .compass__panel--end {
