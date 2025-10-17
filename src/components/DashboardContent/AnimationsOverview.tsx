@@ -1,4 +1,4 @@
-import { Fragment, FunctionComponent, useState } from "react";
+import { Fragment, FunctionComponent } from "react";
 import {
   Button,
   Content,
@@ -15,7 +15,6 @@ import {
   Divider,
   Grid,
   GridItem,
-  PageSection,
   Title,
   Flex,
   Dropdown,
@@ -27,7 +26,6 @@ import {
 } from "@patternfly/react-core";
 import { Table, Thead, Tr, Th, Tbody, Td } from "@patternfly/react-table";
 import ArrowRightIcon from "@patternfly/react-icons/dist/esm/icons/arrow-right-icon";
-import TimesIcon from "@patternfly/react-icons/dist/esm/icons/times-icon";
 import MultiContentCard from "@patternfly/react-component-groups/dist/dynamic/MultiContentCard";
 import AnimationsOverviewClusterInventory from "./AnimationsOverviewClusterInventory.tsx";
 import AnimationsOverviewNetworkActivity from "./AnimationsOverviewNetworkActivity.tsx";

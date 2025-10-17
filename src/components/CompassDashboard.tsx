@@ -17,7 +17,6 @@ import {
   DrawerPanelBody,
   Drawer,
   DrawerContent,
-  DrawerContentBody,
   DrawerPanelContent,
 } from "@patternfly/react-core";
 import BarsIcon from "@patternfly/react-icons/dist/esm/icons/bars-icon";
@@ -171,7 +170,10 @@ export const CompassDashboard: React.FunctionComponent = () => {
             </div>
             <Drawer isExpanded={isContentDrawerOpen}>
               <DrawerContent panelContent={contentDrawerContent}>
-                <div ref={bodyRef} className="compass__body pf-m-plain dashboard">
+                <div
+                  ref={bodyRef}
+                  className="compass__body pf-m-plain dashboard"
+                >
                   <PageSection
                     aria-label="Detail status events"
                     className="pf-m-plain"
