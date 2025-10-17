@@ -64,7 +64,7 @@ export const NetworkActivityCard: React.FunctionComponent = () => {
     // To match the dark theme, we wrap the card in a div with a dark background.
     // The `isPlain` and `isFlat` props on the Card remove its default styling.
     <div>
-      <Card component="div" isFullHeight>
+      <Card component="div" isFullHeight className="glass">
         <CardHeader
           actions={{
             actions: (

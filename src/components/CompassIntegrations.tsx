@@ -673,6 +673,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
       </PageSection>
       <PageSection>
         <SwitchToolTable />
+        <div className="compasss__footer">161 tools selected</div>
       </PageSection>
     </>
   );

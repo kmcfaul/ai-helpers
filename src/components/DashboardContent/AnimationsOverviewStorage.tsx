@@ -44,7 +44,7 @@ export const StorageCard: React.FunctionComponent = () => {
   );
 
   return (
-    <Card component="div" isFullHeight>
+    <Card component="div" isFullHeight className="glass">
       <CardHeader
         actions={{
           actions: (

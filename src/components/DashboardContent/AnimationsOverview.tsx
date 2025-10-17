@@ -77,7 +77,7 @@ const iconMap = {
 };
 
 const recentActivityCard = (
-  <Card component="div">
+  <Card component="div" className="glass">
     <CardHeader
       actions={{
         actions: (
@@ -180,12 +180,6 @@ const recentActivityCard = (
 );
 
 export const AnimationsOverview: FunctionComponent = ({}) => {
-  const [displayMultiContentCard, setDisplayMultiContentCard] = useState(true);
-
-  const handleCloseMultiContentCard = () => {
-    setDisplayMultiContentCard(false);
-  };
-
   const cards = [
     // Card 1: Performance
     <Card isFullHeight isPlain key="card-1">
@@ -270,25 +264,19 @@ export const AnimationsOverview: FunctionComponent = ({}) => {
 
   return (
     <Fragment>
-      <PageSection aria-label="Detail status events">
+      <PageSection aria-label="Detail status events" className="pf-m-plain">
         <Grid hasGutter>
           <GridItem span={12}>
             <MultiContentCard
+              className="glass"
               isExpandable={true}
               withDividers
               cards={cards}
               toggleText="What's new in OpenShift?"
-              actions={
-                <Button
-                  icon={<TimesIcon />}
-                  variant="plain"
-                  onClick={handleCloseMultiContentCard}
-                />
-              }
             />
           </GridItem>
           <GridItem span={12} sm={12} md={6} lg={4} xl={3} rowSpan={4}>
-            <Card isFullHeight>
+            <Card isFullHeight className="glass">
               <CardTitle>
                 <Title headingLevel="h4" size="xl">
                   Cluster Details

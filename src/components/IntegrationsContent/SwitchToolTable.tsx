@@ -18,7 +18,7 @@ export const SwitchToolTable: React.FunctionComponent = () => {
     <Table aria-label="Clickable table">
       <Thead>
         <Tr>
-          <Th>
+          <Th modifier="fitContent">
             <Switch
               id={`row-toggle-all`}
               label=""
