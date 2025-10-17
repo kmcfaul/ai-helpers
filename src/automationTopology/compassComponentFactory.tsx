@@ -25,7 +25,7 @@ const compassComponentFactory: ComponentFactory = (
     case ADD_NODE_TYPE:
       return AddNode;
     case COMPASS_EDGE_TYPE:
-      return withSelection()(CompassEdge);
+      return CompassEdge;
     case FINAL_EDGE_TYPE:
       return FinalEdge;
     default:

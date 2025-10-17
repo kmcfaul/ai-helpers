@@ -23,7 +23,7 @@ const defaultLayoutFactory: LayoutFactory = (type: string, graph: Graph): Layout
     case 'Concentric':
       return new ConcentricLayout(graph);
     case 'Dagre':
-      return new DagreLayout(graph, { rankdir: LEFT_TO_RIGHT });
+      return new DagreLayout(graph, { rankdir: LEFT_TO_RIGHT,  ranksep: 10 });
     case 'Force':
       return new ForceLayout(graph);
     case 'Grid':

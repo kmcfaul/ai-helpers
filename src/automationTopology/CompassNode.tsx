@@ -5,13 +5,10 @@ import {
   OnSelect,
   Node,
   useHover,
-  Layer,
-  TOP_LAYER,
   NodeShadows,
   isNode,
   Rectangle,
   ScaleDetailsLevel,
-  DEFAULT_LAYER
 } from '@patternfly/react-topology';
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-topology/src/css/topology-components';
@@ -173,37 +170,33 @@ const CompassNodeInner: FunctionComponent<CompassNodeInnerProps> = observer(
     };
 
     return (
-      <Layer id={hovered ? TOP_LAYER : DEFAULT_LAYER}>
+      <g transform={`translate(0, ${(height - (contentHeight ?? 0)) / 2})`}>
         <g
-          transform={`translate(0, ${(height - (contentHeight ?? 0)) / 2})`}
+          className={groupClassName}
+          transform={`${scaleNode ? `translate(${translateX}, ${translateY})` : ''} scale(${nodeScale})`}
         >
-          <g
-            className={groupClassName}
-            transform={`${scaleNode ? `translate(${translateX}, ${translateY})` : ''} scale(${nodeScale})`}
-          >
-            <NodeShadows />
-            <g ref={hoverRef as LegacyRef<SVGGElement> | undefined} onClick={onSelect} onContextMenu={onContextMenu}>
-              <Rectangle
-                className={backgroundClassName}
-                element={element}
-                width={width}
-                height={contentHeight ?? height}
-              />
-              {renderAiConfigured()}
-              <g>
-                <foreignObject
-                  width={element.getDimensions().width}
-                  height={contentHeight || element.getDimensions().height}
-                >
-                  <div ref={contentRef}>
-                    <CompassNodeContent nodeData={element.getData()} expanded={expanded} setExpanded={setExpanded} />
-                  </div>
-                </foreignObject>
-              </g>
+          <NodeShadows />
+          <g ref={hoverRef as LegacyRef<SVGGElement> | undefined} onClick={onSelect} onContextMenu={onContextMenu}>
+            <Rectangle
+              className={backgroundClassName}
+              element={element}
+              width={width}
+              height={contentHeight ?? height}
+            />
+            {renderAiConfigured()}
+            <g>
+              <foreignObject
+                width={element.getDimensions().width}
+                height={contentHeight || element.getDimensions().height}
+              >
+                <div ref={contentRef}>
+                  <CompassNodeContent nodeData={element.getData()} expanded={expanded} setExpanded={setExpanded} />
+                </div>
+              </foreignObject>
             </g>
           </g>
         </g>
-      </Layer>
+      </g>
     );
   }
 );
@@ -213,7 +206,7 @@ const CompassNode: React.FunctionComponent<CompassNodeProps> = ({
   ...rest
 }: CompassNodeProps) => {
   if (!isNode(element)) {
-    throw new Error('DefaultNode must be used only on Node elements');
+    throw new Error('CompassNode must be used only on Node elements');
   }
   return (
     <CompassNodeInner element={element as Node} {...rest} />

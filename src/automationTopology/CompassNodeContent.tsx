@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, Ref, useState } from 'react';
 import { AnsibleObjectType, AnsibleTypes } from './type.ts';
 import {
   Button,
@@ -8,11 +8,22 @@ import {
   DescriptionListDescription,
   DescriptionListGroup,
   DescriptionListTerm,
+  Dropdown,
+  DropdownItem,
+  DropdownList,
   Flex,
   FlexItem,
-  Label
+  Label,
+  MenuToggle,
+  MenuToggleElement
 } from '@patternfly/react-core';
-import { AngleDownIcon, AngleUpIcon, EllipsisVIcon } from '@patternfly/react-icons';
+import {
+  AngleDownIcon,
+  AngleUpIcon,
+  BanIcon,
+  CopyIcon,
+  EllipsisVIcon, TrashIcon
+} from '@patternfly/react-icons';
 import AnsibleIcon from './images/AnsibleIcon.ts';
 
 type Props = {
@@ -22,6 +33,8 @@ type Props = {
 }
 
 const CompassNodeContent: FunctionComponent<Props> = ({ nodeData, expanded, setExpanded }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const renderExpansion = () => {
     if (!expanded) {
       return null;
@@ -109,21 +122,68 @@ const CompassNodeContent: FunctionComponent<Props> = ({ nodeData, expanded, setE
             <Content style={{ marginTop: 'var(--pf-t--global--spacer--sm)' }}>{nodeData.description}</Content>
           </FlexItem>
           <FlexItem>
-            <EllipsisVIcon />
-          </FlexItem>
-          <FlexItem
-            onClick={(e) => {
-              e.stopPropagation();
-              setExpanded(!expanded);
-            }}
-          >
+            <span onClick={(e) => e.stopPropagation() }>
+              <Dropdown
+                isOpen={isOpen}
+                onOpenChange={(value: boolean) => {
+                  setIsOpen(value);
+                }}
+                onSelect={() => setIsOpen(false)}
+                toggle={(toggleRef: Ref<MenuToggleElement>) => (
+                  <MenuToggle
+                    ref={toggleRef}
+                    onClick={() => setIsOpen((prev) => !prev)}
+                    isExpanded={isOpen}
+                    variant="plain"
+                    style={{ padding: 4, minWidth: 'unset' }}
+                  >
+                    <EllipsisVIcon />
+                  </MenuToggle>
+                )}
+                shouldFocusToggleOnSelect
+              >
+                <DropdownList>
+                  <DropdownItem>
+                    <Flex direction={{ default: 'row' }} spacer={{ default: 'spacerLg' }}>
+                      <FlexItem>
+                        <CopyIcon />
+                      </FlexItem>
+                      <FlexItem>
+                        Duplicate
+                      </FlexItem>
+                    </Flex>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Flex direction={{ default: 'row' }} spacer={{ default: 'spacerLg' }}>
+                      <FlexItem>
+                        <BanIcon />
+                      </FlexItem>
+                      <FlexItem>
+                        Disable
+                      </FlexItem>
+                    </Flex>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Flex direction={{ default: 'row' }} spacer={{ default: 'spacerLg' }}>
+                      <FlexItem>
+                        <TrashIcon />
+                      </FlexItem>
+                      <FlexItem style={{ color: 'var(--pf-t--global--text--color--status--danger--default)' }}>
+                        Delete
+                      </FlexItem>
+                    </Flex>
+                  </DropdownItem>
+                </DropdownList>
+              </Dropdown>
+            </span>
             <Button
-              variant={ButtonVariant.link}
+              variant={ButtonVariant.plain}
               isInline
               onClick={(e) => {
                 e.stopPropagation();
                 setExpanded(!expanded);
               }}
+              style={{ padding: 4, minWidth: 'unset' }}
             >
               {expanded ? <AngleUpIcon /> : <AngleDownIcon />}
             </Button>
