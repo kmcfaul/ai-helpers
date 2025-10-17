@@ -146,7 +146,8 @@
 .compass__nav--primary,
 .compass__nav--secondary,
 .compass__panel--start,
-.compass__panel--end {
+.compass__panel--end,
+.pf-v6-c-drawer.pf-m-inline.pf-m-floating .pf-v6-c-drawer__panel {
   border: 1px solid var(--compass--glass--border);
   box-shadow: var(--pf-t--global--box-shadow--md);
   position: relative;
@@ -235,6 +236,16 @@
 
 .pf-v6-c-drawer {
   --pf-v6-c-drawer__content--ZIndex: auto;
+}
+
+.pf-v6-c-page__drawer {
+  > .pf-v6-c-drawer {
+    flex-grow: 1;
+
+    > .pf-v6-c-drawer__main > .pf-v6-c-drawer__content {
+      row-gap: var(--compass--main--row-gap);
+    }
+  }
 }
 
 .ai-border {
