@@ -52,13 +52,21 @@ export const CompassDashboard: React.FunctionComponent = () => {
 
       console.log("Scroll values:", { scrollTop, scrollHeight, clientHeight });
 
-      // Check if at the top (within 10px threshold)
-      if (scrollTop <= 10) {
+      // Check if at the top (within 20px threshold)
+      if (scrollTop <= 20) {
         setScrollPosition("top");
+        bodyElement.style.setProperty(
+          "--compass__scroll-top",
+          scrollTop.toString()
+        );
       }
-      // Check if at the bottom (within 10px threshold)
-      else if (scrollTop + clientHeight >= scrollHeight - 10) {
+      // Check if at the bottom (within 20px threshold)
+      else if (scrollTop + clientHeight >= scrollHeight - 20) {
         setScrollPosition("bottom");
+        bodyElement.style.setProperty(
+          "--compass__scroll-bottom",
+          scrollTop.toString()
+        );
       }
       // Otherwise in the middle
       else {
