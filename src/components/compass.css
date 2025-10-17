@@ -90,10 +90,10 @@
   flex-direction: column;
   border-radius: var(--pf-t--global--border--radius--large);
   mask: linear-gradient(
-    var(--compass--feather--scroll-top, transparent),
+    rgba(0, 0, 0, calc(1 - var(--compass__scroll-top) / 20)),
     black var(--compass--feather--length),
     black calc(100% - var(--compass--feather--length)),
-    var(--compass--feather--scroll-bottom, transparent)
+    rgba(0, 0, 0, calc(1 - var(--compass__scroll-top) / 20))
   );
   backdrop-filter: blur(8px);
 
