@@ -19,8 +19,17 @@ import {
   DrawerContent,
   DrawerContentBody,
   DrawerPanelContent,
+  Grid,
+  GridItem,
 } from "@patternfly/react-core";
 import BarsIcon from "@patternfly/react-icons/dist/esm/icons/bars-icon";
+import { CardHorizontalGrid } from "./DashboardContent/CardHorizontalGrid";
+import { CardStatus } from "./DashboardContent/CardStatus";
+import { CardNested } from "./DashboardContent/CardNested";
+import { RecommendationsCard } from "./DashboardContent/RecommendationsCard";
+import { CardDetailsDemo } from "./DashboardContent/CardDetailsDemo";
+import { InventoryCard } from "./DashboardContent/InventoryCard";
+import { CardEventsView } from "./DashboardContent/CardEventsView";
 
 export const CompassDashboard: React.FunctionComponent = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -35,7 +44,7 @@ export const CompassDashboard: React.FunctionComponent = () => {
   };
 
   const drawerContent = (
-    <>
+    <DrawerPanelContent>
       <DrawerHead>
         <span>Dashboard Details</span>
         <DrawerActions>
@@ -51,7 +60,7 @@ export const CompassDashboard: React.FunctionComponent = () => {
           You can add charts, metrics, or other dashboard components here.
         </Content>
       </DrawerPanelBody>
-    </>
+    </DrawerPanelContent>
   );
 
   const contentDrawerContent = (
@@ -76,68 +85,92 @@ export const CompassDashboard: React.FunctionComponent = () => {
 
   return (
     <Fragment>
-      <Page
-        id="pf-compass-center"
-        className="pf-m-no-sidebar pf-m-plain"
-        isContentFilled
-        notificationDrawer={drawerContent}
-        isNotificationDrawerExpanded={isDrawerOpen}
-      >
-        <PageSection>
-          <Flex alignItems={{ default: "alignItemsCenter" }}>
-            <FlexItem grow={{ default: "grow" }}>
-              <Title headingLevel="h1">Dashboard</Title>
-            </FlexItem>
-            <FlexItem>
-              <Toolbar hasNoPadding>
-                <ToolbarContent>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <Button
-                        icon={<BarsIcon />}
-                        variant="plain"
-                        onClick={onDrawerToggle}
-                        aria-label="Toggle drawer"
-                      >
-                        Details
-                      </Button>
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                </ToolbarContent>
-              </Toolbar>
-            </FlexItem>
-          </Flex>
-        </PageSection>
-        <Drawer isExpanded={isContentDrawerOpen}>
-          <DrawerContent panelContent={contentDrawerContent}>
-            <DrawerContentBody>
+      <Drawer isExpanded={isDrawerOpen}>
+        <DrawerContent panelContent={drawerContent}>
+          <DrawerContentBody>
+            <Page
+              id="pf-compass-center"
+              className="pf-m-no-sidebar pf-m-plain"
+              isContentFilled
+            >
               <PageSection>
                 <Flex alignItems={{ default: "alignItemsCenter" }}>
                   <FlexItem grow={{ default: "grow" }}>
-                    <Content component="h2">Dashboard Content</Content>
+                    <Title headingLevel="h1">Dashboard</Title>
                   </FlexItem>
                   <FlexItem>
-                    <Button
-                      icon={<BarsIcon />}
-                      variant="secondary"
-                      onClick={onContentDrawerToggle}
-                      aria-label="Toggle content drawer"
-                    >
-                      Content Details
-                    </Button>
+                    <Toolbar hasNoPadding>
+                      <ToolbarContent>
+                        <ToolbarGroup>
+                          <ToolbarItem>
+                            <Button
+                              icon={<BarsIcon />}
+                              variant="plain"
+                              onClick={onDrawerToggle}
+                              aria-label="Toggle drawer"
+                            >
+                              Details
+                            </Button>
+                          </ToolbarItem>
+                          <ToolbarItem>
+                            <Button
+                              icon={<BarsIcon />}
+                              variant="secondary"
+                              onClick={onContentDrawerToggle}
+                              aria-label="Toggle content drawer"
+                            >
+                              Content Details
+                            </Button>
+                          </ToolbarItem>
+                        </ToolbarGroup>
+                      </ToolbarContent>
+                    </Toolbar>
                   </FlexItem>
                 </Flex>
-                <div style={{ marginTop: "1rem" }}>
-                  <Content component="p">
-                    This is the main dashboard content area. You can add charts,
-                    metrics, tables, or any other dashboard components here.
-                  </Content>
-                </div>
               </PageSection>
-            </DrawerContentBody>
-          </DrawerContent>
-        </Drawer>
-      </Page>
+              <Drawer isExpanded={isContentDrawerOpen}>
+                <DrawerContent panelContent={contentDrawerContent}>
+                  <DrawerContentBody>
+                    <PageSection>
+                      <Grid hasGutter>
+                        <CardHorizontalGrid />
+                        <GridItem lg={4} xl2={6} order={{ lg: "3" }}>
+                          <Flex direction={{ default: "column" }}>
+                            <CardStatus />
+                            <CardNested />
+                            <RecommendationsCard />
+                          </Flex>
+                        </GridItem>
+                        <GridItem lg={4} xl2={3} order={{ lg: "2" }}>
+                          <Flex
+                            direction={{
+                              default: "column",
+                              md: "row",
+                              lg: "column",
+                            }}
+                          >
+                            <FlexItem flex={{ default: "flex_1" }}>
+                              <CardDetailsDemo />
+                            </FlexItem>
+                            <FlexItem flex={{ default: "flex_1" }}>
+                              <InventoryCard />
+                            </FlexItem>
+                          </Flex>
+                        </GridItem>
+                        <GridItem lg={4} xl2={3} order={{ lg: "4" }}>
+                          <Flex direction={{ default: "column" }}>
+                            <CardEventsView />
+                          </Flex>
+                        </GridItem>
+                      </Grid>
+                    </PageSection>
+                  </DrawerContentBody>
+                </DrawerContent>
+              </Drawer>
+            </Page>
+          </DrawerContentBody>
+        </DrawerContent>
+      </Drawer>
     </Fragment>
   );
 };
