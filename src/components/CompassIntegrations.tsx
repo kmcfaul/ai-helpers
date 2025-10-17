@@ -37,6 +37,7 @@ import {
   HelperText,
   Gallery,
   PageGroup,
+  Icon,
 } from "@patternfly/react-core";
 import { ActionsColumn } from "@patternfly/react-table";
 
@@ -46,7 +47,19 @@ import { DataViewTextFilter } from "@patternfly/react-data-view/dist/dynamic/Dat
 import ThIcon from "@patternfly/react-icons/dist/esm/icons/th-icon";
 import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
 import ListIcon from "@patternfly/react-icons/dist/esm/icons/list-icon";
-import ServerIcon from "@patternfly/react-icons/dist/esm/icons/server-icon";
+
+const rhServerStackIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+    className="pf-v6-svg"
+  >
+    <path
+      fill="var(--pf-t--global--icon--color--regular)"
+      d="M28.5 1h-25C2.673 1 2 1.673 2 2.5v27c0 .827.673 1.5 1.5 1.5h25c.827 0 1.5-.673 1.5-1.5v-27c0-.827-.673-1.5-1.5-1.5ZM28 29H4V3h24v26ZM7 8a1 1 0 0 1 1-1h5a1 1 0 0 1 0 2H8a1 1 0 0 1-1-1Zm0 16a1 1 0 0 1 1-1h5a1 1 0 0 1 0 2H8a1 1 0 0 1-1-1Zm0-8a1 1 0 0 1 1-1h5a1 1 0 0 1 0 2H8a1 1 0 0 1-1-1Zm14.38-7.987a1.626 1.626 0 1 1 3.251.001 1.626 1.626 0 0 1-3.251-.001Zm0 8a1.626 1.626 0 1 1 3.251.001 1.626 1.626 0 0 1-3.251-.001Zm-.005 8.002a1.626 1.626 0 1 1 3.251.001 1.626 1.626 0 0 1-3.251-.001Z"
+    />
+  </svg>
+);
 
 export const CompassIntegrations: React.FunctionComponent = () => {
   const [activeDisplay, setActiveDisplay] = useState("grid");
@@ -81,6 +94,106 @@ export const CompassIntegrations: React.FunctionComponent = () => {
       statusText: "Invalid fields",
       type: "MCP Server",
       url: "k8s.example.com",
+    },
+    {
+      id: 4,
+      name: "Docker Registry",
+      description:
+        "A Docker registry is a storage and distribution system for Docker images.",
+      status: "success",
+      statusText: "Connected",
+      type: "Container Registry",
+      url: "registry.example.com",
+    },
+    {
+      id: 5,
+      name: "Jenkins CI/CD",
+      description:
+        "Jenkins is an open source automation server for building, testing, and deploying software.",
+      status: "success",
+      statusText: "Connected",
+      type: "CI/CD",
+      url: "jenkins.example.com",
+    },
+    {
+      id: 6,
+      name: "GitLab",
+      description:
+        "GitLab is a complete DevOps platform delivered as a single application.",
+      status: "danger",
+      statusText: "Disconnected",
+      type: "Version Control",
+      url: "gitlab.example.com",
+    },
+    {
+      id: 7,
+      name: "Prometheus",
+      description:
+        "Prometheus is a monitoring system and time series database for metrics collection.",
+      status: "success",
+      statusText: "Connected",
+      type: "Monitoring",
+      url: "prometheus.example.com",
+    },
+    {
+      id: 8,
+      name: "Elasticsearch",
+      description:
+        "Elasticsearch is a distributed search and analytics engine for all types of data.",
+      status: "warning",
+      statusText: "Degraded",
+      type: "Search Engine",
+      url: "elasticsearch.example.com",
+    },
+    {
+      id: 9,
+      name: "Redis Cache",
+      description:
+        "Redis is an in-memory data structure store used as a database, cache, and message broker.",
+      status: "success",
+      statusText: "Connected",
+      type: "Cache",
+      url: "redis.example.com",
+    },
+    {
+      id: 10,
+      name: "PostgreSQL Database",
+      description:
+        "PostgreSQL is a powerful, open source object-relational database system.",
+      status: "success",
+      statusText: "Connected",
+      type: "Database",
+      url: "postgres.example.com",
+    },
+    {
+      id: 11,
+      name: "Apache Kafka",
+      description:
+        "Apache Kafka is a distributed event streaming platform for building real-time data pipelines.",
+      status: "warning",
+      statusText: "Limited",
+      type: "Message Queue",
+      url: "kafka.example.com",
+    },
+    {
+      id: 12,
+      name: "Terraform",
+      description:
+        "Terraform is an infrastructure as code tool for building, changing, and versioning infrastructure.",
+      status: "success",
+      statusText: "Connected",
+      type: "Infrastructure",
+      url: "terraform.example.com",
+    },
+    {
+      id: 13,
+      name: "Splunk",
+      description:
+        "Splunk is a platform for searching, monitoring, and analyzing machine-generated big data.",
+      status: "danger",
+      statusText: "Disconnected",
+      type: "Logging",
+      url: "splunk.example.com",
     },
   ];
 
@@ -206,74 +319,72 @@ export const CompassIntegrations: React.FunctionComponent = () => {
           </ToolbarItem>
         </ToolbarContent>
       </Toolbar>
-      <Flex flexWrap={{ default: "nowrap" }}>
+      <Gallery hasGutter>
         {integrations.map((product) => (
-          <FlexItem key={product.name} grow={{ default: "grow" }}>
-            <Card
-              isCompact
-              isFullHeight
-              key={product.name}
-              id={product.name.replace(/ /g, "-")}
+          <Card
+            isCompact
+            isFullHeight
+            key={product.name}
+            id={product.name.replace(/ /g, "-")}
+          >
+            <CardHeader
+              actions={{
+                actions: (
+                  <>
+                    <Dropdown
+                      isOpen={false}
+                      onOpenChange={() => {}}
+                      toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
+                        <MenuToggle
+                          ref={toggleRef}
+                          aria-label={`${product.name} actions`}
+                          variant="plain"
+                          icon={<EllipsisVIcon />}
+                        />
+                      )}
+                      popperProps={{ position: "right" }}
+                    />
+                  </>
+                ),
+              }}
             >
-              <CardHeader
-                actions={{
-                  actions: (
-                    <>
-                      <Dropdown
-                        isOpen={false}
-                        onOpenChange={() => {}}
-                        toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
-                          <MenuToggle
-                            ref={toggleRef}
-                            aria-label={`${product.name} actions`}
-                            variant="plain"
-                            icon={<EllipsisVIcon />}
-                          />
-                        )}
-                        popperProps={{ position: "right" }}
-                      />
-                    </>
-                  ),
-                }}
-              >
-                <Content component="h4">{product.name}</Content>
-                <Content component="small">{product.type}</Content>
-              </CardHeader>
-              <CardBody isFilled>{product.description}</CardBody>
-              <CardBody>
-                <DescriptionList aria-label="Details">
-                  <DescriptionListGroup>
-                    <DescriptionListTerm>Status</DescriptionListTerm>
-                    <DescriptionListDescription>
-                      <Label
-                        status={
-                          product.status as
-                            | "success"
-                            | "danger"
-                            | "warning"
-                            | "info"
-                            | "custom"
-                            | undefined
-                        }
-                        isCompact
-                        variant="outline"
-                      >
-                        {product.statusText}
-                      </Label>
-                    </DescriptionListDescription>
-                  </DescriptionListGroup>
-                  <DescriptionListGroup>
-                    <DescriptionListTerm>Url</DescriptionListTerm>
-                    <DescriptionListDescription>
-                      <a>{product.url}</a>
-                    </DescriptionListDescription>
-                  </DescriptionListGroup>
-                </DescriptionList>
-              </CardBody>
-            </Card>
-          </FlexItem>
+              <Content component="h4">{product.name}</Content>
+              <Content component="small">{product.type}</Content>
+            </CardHeader>
+            <CardBody isFilled>{product.description}</CardBody>
+            <CardBody>
+              <DescriptionList aria-label="Details">
+                <DescriptionListGroup>
+                  <DescriptionListTerm>Status</DescriptionListTerm>
+                  <DescriptionListDescription>
+                    <Label
+                      status={
+                        product.status as
+                          | "success"
+                          | "danger"
+                          | "warning"
+                          | "info"
+                          | "custom"
+                          | undefined
+                      }
+                      isCompact
+                      variant="outline"
+                    >
+                      {product.statusText}
+                    </Label>
+                  </DescriptionListDescription>
+                </DescriptionListGroup>
+                <DescriptionListGroup>
+                  <DescriptionListTerm>Url</DescriptionListTerm>
+                  <DescriptionListDescription>
+                    <a>{product.url}</a>
+                  </DescriptionListDescription>
+                </DescriptionListGroup>
+              </DescriptionList>
+            </CardBody>
+          </Card>
         ))}
-      </Flex>
+      </Gallery>
     </>
   );
 
@@ -356,7 +467,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
                     gap={{ default: "gapSm" }}
                     justifyContent={{ default: "justifyContentCenter" }}
                   >
-                    <ServerIcon />
+                    <Icon size="xl">{rhServerStackIcon}</Icon>
                   </Flex>
                 </CardHeader>
                 <CardBody>
@@ -383,7 +494,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
                     gap={{ default: "gapSm" }}
                     justifyContent={{ default: "justifyContentCenter" }}
                   >
-                    <ServerIcon />
+                    <Icon size="xl">{rhServerStackIcon}</Icon>
                   </Flex>
                 </CardHeader>
                 <CardBody>
@@ -410,7 +521,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
                     gap={{ default: "gapSm" }}
                     justifyContent={{ default: "justifyContentCenter" }}
                   >
-                    <ServerIcon />
+                    <Icon size="xl">{rhServerStackIcon}</Icon>
                   </Flex>
                 </CardHeader>
                 <CardBody>
@@ -442,7 +553,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
                     gap={{ default: "gapSm" }}
                     justifyContent={{ default: "justifyContentCenter" }}
                   >
-                    <ServerIcon />
+                    <Icon size="xl">{rhServerStackIcon}</Icon>
                   </Flex>
                 </CardHeader>
                 <CardBody>
