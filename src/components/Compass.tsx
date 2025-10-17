@@ -22,7 +22,7 @@ import PlayIcon from "@patternfly/react-icons/dist/esm/icons/play-icon";
 import OutlinedPlusSquare from "@patternfly/react-icons/dist/esm/icons/outlined-plus-square-icon";
 import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
 import OutlinedCopy from "@patternfly/react-icons/dist/esm/icons/outlined-copy-icon";
-import imgAvatar from "../assets/avatarImg.svg?url";
+import imgAvatar from "../assets/avatar.jpg";
 
 import { CompassIntegrations } from "./CompassIntegrations";
 import { CompassAutomations } from "./CompassAutomations";
@@ -106,7 +106,7 @@ export const Compass: React.FunctionComponent = () => {
             alignItems={{ default: "alignItemsCenter" }}
             gap={{ default: "gapMd" }}
           >
-            Ned Username
+            Aliyah Frazier
             <Avatar src={imgAvatar} alt="" size="md" />
           </Flex>
         </MenuToggle>
@@ -197,7 +197,7 @@ export const Compass: React.FunctionComponent = () => {
           </ActionListGroup>
           <ActionListItem>
             <Button
-              className="compass__sparkle"
+              className="compass__sparkle ai-border"
               variant="plain"
               icon={aiExperienceIcon}
             ></Button>
@@ -245,8 +245,9 @@ export const Compass: React.FunctionComponent = () => {
       </div>
       <div id="pf-compass__south" className="compass__footer">
         <MessageBar
+          className="ai-border"
           isCompact
-          onSendMessage={() => {}}
+          onSendMessage={() => { }}
           hasAttachButton={false}
         />
       </div>

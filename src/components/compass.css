@@ -8,11 +8,13 @@
   --compass--glass--background-filter: blur(32px);
   --compass--glass--border: var(--pf-t--global--border--color--alt);
   --compass--glass--bgcolor: var(--pf-t--global--background--color--primary--default);
-  --compass--glass--opacity: 20%;
+  --compass--glass--opacity: 100%;
+  --compass--glass--blend-mode: soft-light;
+  --compass--glass--blend-mode--dark: overlay;
+  --compass--glass--backdrop-filter: opacity(0.5);
+  --compass--glass--backdrop-filter--dark: blur(75px);
   --compass--message-bar--min-width: 300px;
   --compass--message-bar--max-width: 600px;
-  --compass--input--backdrop-filter: saturate(0.5);
-  --compass--input--backdrop-filter--dark: brightness(0.5);
 
   padding: var(--compass--padding);
   display: grid;
@@ -56,13 +58,20 @@
 .compass__panel--start {
   grid-area: panel-start;
   padding: var(--pf-t--global--spacer--sm);
-  border-radius: var(--pf-t--global--border--radius--pill);
 }
 
 .compass__panel--start,
 .compass__panel--end {
-  .pf-v6-c-button.pf-m-plain {
+  .pf-v6-c-button {
     --pf-v6-c-button--FontSize: var(--pf-t--global--icon--size--font--lg);
+  }
+}
+
+.compass__sparkle.pf-m-plain {
+  .pf-v6-c-button__icon {
+    transform-origin: center center;
+    translate: 0.07rem 0.1rem;
+    scale: 1.25;
   }
 }
 
@@ -75,7 +84,6 @@
 .compass__panel--end {
   grid-area: panel-end;
   padding: var(--pf-t--global--spacer--sm);
-  border-radius: var(--pf-t--global--border--radius--pill);
 }
 
 .compass__footer {
@@ -84,12 +92,8 @@
   justify-content: center;
 }
 
-.compass__sparkle .pf-v6-c-button__icon {
-  translate: 0.07rem 0.1rem;
-}
-
 .pf-v6-c-tabs {
-  border-radius: var(--pf-t--global--border--radius--pill);
+  --pf-v6-c-tabs__link--FontSize: var(--pf-t--global--font--size--body--default);
 }
 
 .pf-v6-c-action-list.pf-m-vertical,
@@ -112,6 +116,8 @@
   --pf-v6-c-page__main-section--PaddingBlockEnd: var(--pf-t--global--spacer--lg);
   --pf-v6-c-page__main-section--PaddingInlineStart: var(--pf-t--global--spacer--lg);
   --pf-v6-c-page__main-section--PaddingInlineEnd: var(--pf-t--global--spacer--lg);
+  --pf-v6-c-page__main-section--BackgroundColor: transparent;
+  --pf-v6-c-page__main-container--ZIndex: auto;
 
   height: 100%;
 
@@ -125,19 +131,46 @@
 
   .pf-v6-c-page__main {
     row-gap: var(--compass--main--row-gap);
+    overflow: visible;
+  }
+
+  .pf-v6-c-page__main-container {
+    margin-inline: var(--pf-t--global--spacer--sm);
+    padding-inline: var(--pf-t--global--spacer--sm);
   }
 }
 
-.glass,
+.pf-chatbot__message-bar,
+.pf-v6-c-tabs,
 .pf-v6-c-page__main-section,
-.pf-v6-c-card,
+.compass__nav--primary,
+.compass__nav--secondary,
 .compass__panel--start,
-.compass__panel--end,
-.pf-v6-c-tabs {
-  background: color-mix(in srgb, var(--compass--glass--bgcolor) var(--compass--glass--opacity), transparent);
-  backdrop-filter: var(--compass--glass--background-filter);
+.compass__panel--end {
   border: 1px solid var(--compass--glass--border);
-  backdrop-filter: var(--compass--input--backdrop-filter);
+  box-shadow: var(--pf-t--global--box-shadow--md);
+  position: relative;
+
+  &::after {
+    content: "";
+    inset: 0;
+    position: absolute;
+    background: color-mix(in srgb, var(--compass--glass--bgcolor) var(--compass--glass--opacity), transparent);
+    mix-blend-mode: var(--compass--glass--blend-mode);
+    backdrop-filter: var(--compass--glass--backdrop-filter);
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}
+
+.pf-v6-c-tabs,
+.compass__message-bar,
+.compass__nav--primary,
+.compass__nav--secondary,
+.compass__panel--start,
+.compass__panel--end {
+  border-radius: var(--pf-t--global--border--radius--pill);
 }
 
 .pf-v6-c-card {
@@ -150,6 +183,7 @@
   --pf-v6-c-tabs__link--disabled--Color: var(--pf-t--global--text--color--disabled);
   --pf-v6-c-tabs__link--hover--BorderColor: transparent;
   --pf-v6-c-tabs__link--BorderRadius: var(--pf-t--global--border--radius--pill);
+  --pf-v6-c-tabs--inset: var(--pf-t--global--spacer--xl);
 
   &::before {
     border: 0;
@@ -186,30 +220,33 @@
   max-width: var(--compass--message-bar--max-width);
   padding-inline-start: 0px;
   padding-inline-end: 0px;
-  border: var(--pf-t--global--border--width--strong) solid transparent;
-  border-radius: var(--pf-t--global--border--radius--pill);
-  background-image: linear-gradient(transparent, transparent),
-    linear-gradient(to right, #f56e6e 0%, #876fd4 65%, #5e40be 100%);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
+  background: transparent;
+  border: 0;
 
-  &::after {
-    content: "";
-    position: absolute;
-    inset: var(--pf-t--global--border--width--strong);
-    background-color: var(--pf-t--global--background--color--primary--default);
-    border-radius: inherit;
-    z-index: -1;
+  &:hover,
+  &:focus-within {
+    box-shadow: var(--pf-t--global--box-shadow--md);
   }
+}
+
+.ai-border {
+  position: relative;
+}
+
+.ai-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: var(--pf-t--global--border--width--extra-strong) solid transparent;
+  border-radius: inherit;
+  background: linear-gradient(to right, #f56e6e 0%, #876fd4 65%, #5e40be 100%) border-box;
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .pf-v6-c-text-input-group {
   --pf-v6-c-text-input-group--BackgroundColor: var(--pf-t--global--background--color--primary--default);
-}
-
-.pf-v6-c-text-input-group,
-.pf-chatbot__message-bar {
-  backdrop-filter: var(--compass--input--backdrop-filter);
 }
 
 :where(a) {
@@ -239,6 +276,8 @@ body {
   --compass--glass--background-filter: revert;
   --compass--glass--opacity: 100%;
   --compass--glass--border: var(--pf-t--global--border--color--default);
+  --compass--glass--blend-mode: none;
+  --compass--glass--blend-mode--dark: none;
 
   .pf-v6-c-tabs.pf-m-subtab {
     --compass--glass--bgcolor: var(--pf-t--global--background--color--secondary--default);
@@ -246,19 +285,11 @@ body {
 }
 
 :where(.pf-v6-theme-dark) .compass {
-  --compass--input--backdrop-filter: var(--compass--input--backdrop-filter--dark);
-}
-
-:root {
+  --compass--glass--blend-mode: var(--compass--glass--blend-mode--dark);
+  --compass--glass--backdrop-filter: var(--compass--glass--backdrop-filter--dark);
 }
 
 /*
 input gradient
 #F56E6E 0% > #876FD4 65% > #5E40BE 100%
-*/
-
-/*
-primary bg for inputs
-overlay filter for dark theme
-softlight in light theme
 */

@@ -5,13 +5,13 @@ import {
   Flex,
   FlexItem,
   Title,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-  Button,
+  // Toolbar,
+  // ToolbarContent,
+  // ToolbarGroup,
+  // ToolbarItem,
+  // Button,
 } from "@patternfly/react-core";
-import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
+// import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
 
 export const CompassContent: React.FunctionComponent = () => {
   return (
