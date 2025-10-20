@@ -16,16 +16,16 @@ import {
 import DemoControlBar from './ControlBar';
 import { useDemoCompassModel } from './useDemoCompassModel';
 import OptionsContextBar from './OptionsViewBar';
-import compassComponentFactory from './compassComponentFactory';
+import compassComponentFactory from './components/compassComponentFactory.tsx';
 import compassLayoutFactory from './compassLayoutFactory';
-import { AnsibleObjectType, AnsibleTypes } from './type.ts';
+import { AnsibleObjectType, AnsibleSubTypes, AnsibleTypes } from './type.ts';
 
 const demoAnsibleObjects: AnsibleObjectType[] = [
   {
     id: `aap-node-1`,
     type: AnsibleTypes.AUTOMATION_PLATFORM,
     aiConfigured: true,
-    subType: 'Trigger',
+    subType: AnsibleSubTypes.TRIGGER,
     description: 'Trigger event shows need to create VM',
     integrations: ['ansible-automation-platform', 'aws'],
     action: 'Run Playbook',
@@ -35,7 +35,7 @@ const demoAnsibleObjects: AnsibleObjectType[] = [
     id: `aap-node-2`,
     type: AnsibleTypes.ANALYSIS_AGENT,
     aiConfigured: true,
-    subType: 'AI Agent',
+    subType: AnsibleSubTypes.AGENT,
     description: 'Analyze region expenses, resource availability, and organizational policies',
     integrations: ['ansible-automation-platform', 'aws'],
     action: 'Run Playbook',
@@ -45,8 +45,8 @@ const demoAnsibleObjects: AnsibleObjectType[] = [
     id: `aap-node-3`,
     type: AnsibleTypes.AUTOMATION_PLATFORM,
     aiConfigured: true,
-    subType: 'Application',
-    description: 'Create VM playbook run',
+    subType: AnsibleSubTypes.APPLICATION,
+    description: 'Create VM playbook',
     integrations: ['ansible-automation-platform', 'aws'],
     action: 'Run Playbook',
     playbook: 'VM_Deployment',

@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useRef, useMemo, useEffect, LegacyRef } from 'react';
+import { FunctionComponent, ReactNode, useState, useRef, useMemo, useEffect, LegacyRef } from 'react';
 import { observer } from 'mobx-react';
 import {
   GraphElement,
@@ -7,14 +7,13 @@ import {
   useHover,
   NodeShadows,
   isNode,
-  Rectangle,
   ScaleDetailsLevel,
 } from '@patternfly/react-topology';
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-topology/src/css/topology-components';
-import { useSize } from './useSize.ts';
+import { useSize } from '../useSize.ts';
 import { CheckIcon } from '@patternfly/react-icons';
-import CompassNodeContent from './CompassNodeContent.tsx';
+import CustomRectangle from '../shapes/CustomRectangle.tsx';
 
 interface CompassNodeProps {
   /** The graph node element to represent */
@@ -23,6 +22,12 @@ interface CompassNodeProps {
   selected?: boolean;
   /** Function to call when the element should become selected (or deselected). Part of WithSelectionProps */
   onSelect?: OnSelect;
+  topRightRadius?: number;
+  topLeftRadius?: number;
+  bottomRightRadius?: number;
+  bottomLeftRadius?: number;
+  expanded?: boolean;
+  children?: ReactNode;
 }
 const SCALE_UP_TIME = 200;
 
@@ -33,12 +38,16 @@ const CompassNodeInner: FunctionComponent<CompassNodeInnerProps> = observer(
      element,
      selected,
      onSelect,
+     topRightRadius,
+     topLeftRadius,
+     bottomRightRadius,
+     bottomLeftRadius,
+     children,
    }) => {
     const [hovered, hoverRef] = useHover();
     const { width, height } = element.getDimensions();
     const [nodeScale, setNodeScale] = useState<number>(1);
     const detailsLevel = element.getGraph().getDetailsLevel();
-    const [expanded, setExpanded] = useState<boolean>(false);
     const [contentHeight, setContentHeight] = useState<number>();
     const [configuredLabelSize, configuredLabelRef] = useSize();
    const scaleNode = hovered && detailsLevel === ScaleDetailsLevel.low;
@@ -131,7 +140,7 @@ const CompassNodeInner: FunctionComponent<CompassNodeInnerProps> = observer(
       const padding = 4;
       const fullLabelWidth = labelWidth + padding * 6;
       const fullLabelHeight = labelHeight + padding * 2;
-      const labelPositionX = width / 2 - fullLabelWidth / 2;
+      const labelPositionX = width - fullLabelWidth;
       const labelPositionY = 0 - fullLabelHeight - padding * 2;
 
       const backgroundClassName = css(styles.topologyNodeBackground, selected && 'pf-m-selected');
@@ -177,11 +186,15 @@ const CompassNodeInner: FunctionComponent<CompassNodeInnerProps> = observer(
         >
           <NodeShadows />
           <g ref={hoverRef as LegacyRef<SVGGElement> | undefined} onClick={onSelect} onContextMenu={onContextMenu}>
-            <Rectangle
+            <CustomRectangle
               className={backgroundClassName}
               element={element}
               width={width}
               height={contentHeight ?? height}
+              topLeftRadius={topLeftRadius}
+              topRightRadius={topRightRadius}
+              bottomLeftRadius={bottomLeftRadius}
+              bottomRightRadius={bottomRightRadius}
             />
             {renderAiConfigured()}
             <g>
@@ -190,7 +203,7 @@ const CompassNodeInner: FunctionComponent<CompassNodeInnerProps> = observer(
                 height={contentHeight || element.getDimensions().height}
               >
                 <div ref={contentRef}>
-                  <CompassNodeContent nodeData={element.getData()} expanded={expanded} setExpanded={setExpanded} />
+                  {children}
                 </div>
               </foreignObject>
             </g>

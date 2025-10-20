@@ -2,22 +2,24 @@ import { useMemo } from 'react';
 import { EdgeModel, NodeModel, NodeShape } from '@patternfly/react-topology';
 import {
   ADD_NODE_TYPE,
+  COMPASS_AGENT_WIDTH,
   COMPASS_EDGE_TYPE,
   COMPASS_NODE_HEIGHT,
-  COMPASS_NODE_TYPE,
-  COMPASS_NODE_WIDTH,
-  FINAL_EDGE_TYPE
+  COMPASS_PLATFORM_WIDTH,
+  FINAL_EDGE_TYPE,
+  PLATFORM_NODE_TYPE,
+  AGENT_NODE_TYPE
 } from './const';
-import { AnsibleObjectType } from './type.ts';
+import { AnsibleObjectType, AnsibleTypes } from './type.ts';
 
 export const useDemoCompassModel = (ansibleObjects: AnsibleObjectType[]): { nodes: NodeModel[]; edges: EdgeModel[] } => {
   const nodes = useMemo(() => {
     const modelNodes = ansibleObjects.map<NodeModel>((ansibleObject: AnsibleObjectType) => {
       return {
         id: ansibleObject.id,
-        type: COMPASS_NODE_TYPE,
+        type: ansibleObject.type === AnsibleTypes.AUTOMATION_PLATFORM ? PLATFORM_NODE_TYPE : AGENT_NODE_TYPE,
         label: ansibleObject.type,
-        width: COMPASS_NODE_WIDTH,
+        width: ansibleObject.type  === AnsibleTypes.AUTOMATION_PLATFORM ? COMPASS_PLATFORM_WIDTH : COMPASS_AGENT_WIDTH,
         height: COMPASS_NODE_HEIGHT,
         shape: NodeShape.rect,
         data: ansibleObject

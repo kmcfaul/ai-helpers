@@ -6,11 +6,17 @@ import {
   GraphComponent,
   withPanZoom, DefaultNode, DefaultEdge
 } from '@patternfly/react-topology';
-import CompassNode from './CompassNode.tsx';
-import CompassEdge from './CompassEdge';
-import { ADD_NODE_TYPE, COMPASS_EDGE_TYPE, COMPASS_NODE_TYPE, FINAL_EDGE_TYPE } from './const';
+import CompassEdge from './CompassEdge.tsx';
+import {
+  ADD_NODE_TYPE, AGENT_NODE_TYPE,
+  COMPASS_EDGE_TYPE,
+  FINAL_EDGE_TYPE,
+  PLATFORM_NODE_TYPE
+} from '../const.ts';
 import AddNode from './AddNode.tsx';
 import FinalEdge from './FinalEdge.tsx';
+import PlatformNode from './PlatformNode.tsx';
+import AgentNode from './AgentNode.tsx';
 
 const compassComponentFactory: ComponentFactory = (
   kind: ModelKind,
@@ -20,8 +26,10 @@ const compassComponentFactory: ComponentFactory = (
     return withPanZoom()(withSelection()(GraphComponent));
   }
   switch (type) {
-    case COMPASS_NODE_TYPE:
-      return withSelection()(CompassNode);
+    case PLATFORM_NODE_TYPE:
+      return withSelection()(PlatformNode);
+    case AGENT_NODE_TYPE:
+      return withSelection()(AgentNode);
     case ADD_NODE_TYPE:
       return AddNode;
     case COMPASS_EDGE_TYPE:

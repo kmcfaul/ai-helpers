@@ -3,11 +3,17 @@ export enum AnsibleTypes {
   ANALYSIS_AGENT = 'Analysis Agent',
 }
 
+export enum AnsibleSubTypes {
+  TRIGGER = 'Trigger application',
+  AGENT = 'Agent',
+  APPLICATION = 'Application'
+}
+
 export type AnsibleObjectType = {
   id: string;
   type: AnsibleTypes;
   aiConfigured: boolean,
-  subType: string;
+  subType: AnsibleSubTypes;
   description: string;
   integrations: string[];
   action: string;

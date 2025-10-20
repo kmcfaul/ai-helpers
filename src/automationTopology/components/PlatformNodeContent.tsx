@@ -1,5 +1,5 @@
 import { FunctionComponent, Ref, useState } from 'react';
-import { AnsibleObjectType, AnsibleTypes } from './type.ts';
+import { AnsibleObjectType } from '../type.ts';
 import {
   Button,
   ButtonVariant,
@@ -24,7 +24,7 @@ import {
   CopyIcon,
   EllipsisVIcon, TrashIcon
 } from '@patternfly/react-icons';
-import AnsibleIcon from './images/AnsibleIcon.ts';
+import AnsibleIcon from '../images/AnsibleIcon.ts';
 
 type Props = {
   nodeData: AnsibleObjectType;
@@ -32,42 +32,12 @@ type Props = {
   setExpanded: (expanded: boolean) => void;
 }
 
-const CompassNodeContent: FunctionComponent<Props> = ({ nodeData, expanded, setExpanded }) => {
+const PlatformNodeContent: FunctionComponent<Props> = ({ nodeData, expanded, setExpanded }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const renderExpansion = () => {
     if (!expanded) {
       return null;
-    }
-    if (nodeData.type === AnsibleTypes.AUTOMATION_PLATFORM) {
-      return (
-        <FlexItem>
-          <DescriptionList isCompact style={{ marginTop: 8, marginBottom: 8 }}>
-            <DescriptionListGroup>
-              <DescriptionListTerm>Integrations</DescriptionListTerm>
-              <DescriptionListDescription>
-                <Flex spaceItems={{ default: 'spaceItemsXs' }}>
-                  {nodeData.integrations?.map((integration) => (
-                    <FlexItem key={integration}>
-                      <Label >{integration}</Label>
-                    </FlexItem>
-                  ))}
-                </Flex>
-              </DescriptionListDescription>
-            </DescriptionListGroup>
-            <DescriptionListGroup>
-              <DescriptionListTerm>Trigger Type</DescriptionListTerm>
-              <DescriptionListDescription>
-                Webhook
-              </DescriptionListDescription>
-            </DescriptionListGroup>
-            <DescriptionListGroup>
-              <DescriptionListTerm>Event</DescriptionListTerm>
-              <DescriptionListDescription>Job Complete</DescriptionListDescription>
-            </DescriptionListGroup>
-          </DescriptionList>
-        </FlexItem>
-      );
     }
 
     return (
@@ -86,14 +56,14 @@ const CompassNodeContent: FunctionComponent<Props> = ({ nodeData, expanded, setE
             </DescriptionListDescription>
           </DescriptionListGroup>
           <DescriptionListGroup>
-            <DescriptionListTerm>Model</DescriptionListTerm>
+            <DescriptionListTerm>Trigger Type</DescriptionListTerm>
             <DescriptionListDescription>
-              GPT-4
+              Webhook
             </DescriptionListDescription>
           </DescriptionListGroup>
           <DescriptionListGroup>
-            <DescriptionListTerm>Memory</DescriptionListTerm>
-            <DescriptionListDescription>Last 10 interactions</DescriptionListDescription>
+            <DescriptionListTerm>Event</DescriptionListTerm>
+            <DescriptionListDescription>Job Complete</DescriptionListDescription>
           </DescriptionListGroup>
         </DescriptionList>
       </FlexItem>
@@ -104,22 +74,20 @@ const CompassNodeContent: FunctionComponent<Props> = ({ nodeData, expanded, setE
     <Flex
       direction={{ default: 'column' }}
       spacer={{ default: 'spacerLg' }}
-      style={{ padding: 8 }}
+      style={{ padding: 'var(--pf-t--global--spacer--md)' }}
     >
       <FlexItem>
         <Flex
           direction={{ default: 'row' }}
           spacer={{ default: 'spacerSm' }}
-          alignItems={{ default: 'alignItemsFlexStart' }}
+          alignItems={{ default: 'alignItemsCenter' }}
+          justifyContent={{ default: 'justifyContentSpaceBetween' }}
           flexWrap={{ default: 'nowrap' }}
         >
           <FlexItem>
-            <AnsibleIcon />
-          </FlexItem>
-          <FlexItem flex={{ default: 'flex_1' }}>
-            <Content>{nodeData.type}</Content>
-            <Content style={{ color: 'var(--pf-t--global--text--color--subtle)' }}>{nodeData.subType}</Content>
-            <Content style={{ marginTop: 'var(--pf-t--global--spacer--sm)' }}>{nodeData.description}</Content>
+            <Content component="h3">
+              <AnsibleIcon />
+            </Content>
           </FlexItem>
           <FlexItem>
             <span onClick={(e) => e.stopPropagation() }>
@@ -190,9 +158,14 @@ const CompassNodeContent: FunctionComponent<Props> = ({ nodeData, expanded, setE
           </FlexItem>
         </Flex>
       </FlexItem>
+      <FlexItem flex={{ default: 'flex_1' }}>
+        <Content component="h3">{nodeData.type}</Content>
+        <Content style={{ color: 'var(--pf-t--global--text--color--subtle)' }}>{nodeData.subType}</Content>
+        <Content style={{ marginTop: 'var(--pf-t--global--spacer--sm)' }}>{nodeData.description}</Content>
+      </FlexItem>
       {renderExpansion()}
     </Flex>
   );
 };
 
-export default CompassNodeContent;
+export default PlatformNodeContent;
