@@ -59,11 +59,8 @@
   background-repeat: no-repeat;
 }
 
-:root(:not(.pf-v6-theme-dark)) .compass__hero {
-  &,
-  .pf-v6-c-content {
-    color: var(--pf-t--global--text--color--inverse);
-  }
+:root:not(.pf-v6-theme-dark) .compass__hero {
+  --pf-v6-c-content--Color: var(--pf-t--global--text--color--inverse);
 }
 
 .compass__hero-body {

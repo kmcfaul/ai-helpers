@@ -65,7 +65,7 @@ export const MemoryUtilizationCard: React.FunctionComponent = () => {
         <CardTitle>
           <Flex alignItems={{ default: "alignItemsCenter" }}>
             <TachometerAltIcon />
-            <span>Memory utilization</span>
+            <span>Memory usage</span>
           </Flex>
         </CardTitle>
       </CardHeader>
