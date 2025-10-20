@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from 'react';
+import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 import { Flex, FlexItem } from '@patternfly/react-core';
 import {
   defaultElementFactory,
@@ -7,7 +7,6 @@ import {
   observer,
   SELECTION_EVENT,
   SelectionEventListener,
-  TopologySideBar,
   TopologyView,
   useEventListener,
   useVisualizationController,
@@ -23,6 +22,7 @@ import { AnsibleObjectType, AnsibleSubTypes, AnsibleTypes } from './type.ts';
 import OptionsViewBar from './OptionsViewBar';
 
 import './css/compass-topology-components.css';
+import CompassAutomationSidePanel from './details/CompassAutomationSidePanel.tsx';
 
 const demoAnsibleObjects: AnsibleObjectType[] = [
   {
@@ -75,6 +75,14 @@ const TopologyViewComponent: FunctionComponent = observer(() => {
 
     controller.fromModel(model, true);
   }, [controller, dataModel]);
+
+  const selectedObject = useMemo(() => {
+    if (!selectedIds?.[0]) {
+      return undefined;
+    }
+    return dataModel.nodes.find((node) => node.id === selectedIds[0])?.data;
+
+  }, [dataModel, selectedIds])
 
   // Once we have the graph, run the layout. This ensures the graph size is set (by the initial size observation in VisualizationSurface)
   // and the graph is centered by the layout.
@@ -132,12 +140,6 @@ const TopologyViewComponent: FunctionComponent = observer(() => {
     };
   }, [selectedIds, controller]);
 
-  const topologySideBar = (
-    <TopologySideBar show={!!selectedIds?.length} onClose={() => setSelectedIds([])}>
-      <div style={{ marginTop: 27, marginLeft: 20 }}>{selectedIds?.[0]}</div>
-    </TopologySideBar>
-  );
-
   return (
     <Flex direction={{ default: 'column' }} spacer={{ default: "spacerSm" }} style={{ height: '100%' }}>
       <FlexItem>
@@ -147,7 +149,7 @@ const TopologyViewComponent: FunctionComponent = observer(() => {
         <TopologyView controlBar={<DemoControlBar />}>
           <VisualizationSurface state={{ selectedIds }} />
         </TopologyView>
-        {topologySideBar}
+        <CompassAutomationSidePanel ansibleObject={selectedObject} onClose={() => setSelectedIds([])} />
       </FlexItem>
     </Flex>
   );

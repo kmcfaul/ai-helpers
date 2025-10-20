@@ -9,7 +9,7 @@ import {
 import CompassNode from './CompassNode.tsx';
 import { AnsibleSubTypes } from '../type.ts';
 import { TRIGGER_LEFT_RADIUS } from '../const.ts';
-import PlatformNodeContent from './PlatformNodeContent.tsx';
+import PlatformNodeContent from '../details/PlatformNodeContent.tsx';
 
 interface PlatformNodeProps {
   /** The graph node element to represent */

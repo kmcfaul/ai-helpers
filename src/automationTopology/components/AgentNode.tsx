@@ -8,7 +8,7 @@ import {
 import CompassNode from './CompassNode.tsx';
 import { AnsibleSubTypes } from '../type.ts';
 import { TRIGGER_LEFT_RADIUS } from '../const.ts';
-import AgentNodeContent from './AgentNodeContent.tsx';
+import AgentNodeContent from '../details/AgentNodeContent.tsx';
 
 interface AgentNodeProps {
   element: GraphElement;
