@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import { useCallback, useRef } from "react";
 import {
   Background,
   ReactFlow,
@@ -7,6 +7,8 @@ import {
   addEdge,
   useReactFlow,
   ReactFlowProvider,
+  Connection,
+  OnConnectEnd,
 } from "@xyflow/react";
 
 import "@xyflow/react/dist/style.css";
@@ -22,20 +24,20 @@ const initialNodes = [
 
 let id = 1;
 const getId = () => `${id++}`;
-const nodeOrigin = [0.5, 0];
+const nodeOrigin: [number, number] = [0.5, 0];
 
 const AddNodeOnEdgeDrop = () => {
   const reactFlowWrapper = useRef(null);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([] as any);
   const { screenToFlowPosition } = useReactFlow();
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     []
   );
 
-  const onConnectEnd = useCallback(
+  const onConnectEnd: OnConnectEnd = useCallback(
     (event, connectionState) => {
       // when a connection is dropped on the pane it's not valid
       if (!connectionState.isValid) {
@@ -45,17 +47,22 @@ const AddNodeOnEdgeDrop = () => {
           "changedTouches" in event ? event.changedTouches[0] : event;
         const newNode = {
           id,
+          type: "default",
           position: screenToFlowPosition({
             x: clientX,
             y: clientY,
           }),
           data: { label: `Node ${id}` },
-          origin: [0.5, 0.0],
+          origin: [0.5, 0.0] as [number, number],
         };
 
         setNodes((nds) => nds.concat(newNode));
         setEdges((eds) =>
-          eds.concat({ id, source: connectionState.fromNode.id, target: id })
+          eds.concat({
+            id,
+            source: connectionState.fromNode?.id || "",
+            target: id,
+          })
         );
       }
     },
