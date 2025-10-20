@@ -1,39 +1,16 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import {
-  Flex,
-  FlexItem,
-  Title,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
   Button,
-  DrawerHead,
-  DrawerActions,
-  DrawerCloseButton,
+  ActionListItem,
   Content,
-  DrawerPanelBody,
-  Drawer,
-  DrawerContent,
-  DrawerPanelContent,
+  ActionList,
 } from "@patternfly/react-core";
-import BarsIcon from "@patternfly/react-icons/dist/esm/icons/bars-icon";
 import { AnimationsOverview } from "./DashboardContent/AnimationsOverview";
 import { CompassPage } from "./lib/CompassPage";
 import { CompassPageBody } from "./lib/CompassPageBody";
 
 export const CompassDashboard: React.FunctionComponent = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isContentDrawerOpen, setIsContentDrawerOpen] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
-
-  const onDrawerToggle = () => {
-    setIsDrawerOpen(!isDrawerOpen);
-  };
-
-  const onContentDrawerToggle = () => {
-    setIsContentDrawerOpen(!isContentDrawerOpen);
-  };
 
   // Remove if we decide to not use the feathered opacity scroll effect
   useEffect(() => {
@@ -82,106 +59,37 @@ export const CompassDashboard: React.FunctionComponent = () => {
     };
   }, []);
 
-  const drawerContent = (
-    <DrawerPanelContent>
-      <DrawerHead>
-        <span>Dashboard Details</span>
-        <DrawerActions>
-          <DrawerCloseButton onClick={onDrawerToggle} />
-        </DrawerActions>
-      </DrawerHead>
-      <DrawerPanelBody>
-        <Content component="h3">Dashboard Information</Content>
-        <Content component="p">
-          This drawer contains additional dashboard details and controls.
-        </Content>
-        <Content component="p">
-          You can add charts, metrics, or other dashboard components here.
-        </Content>
-      </DrawerPanelBody>
-    </DrawerPanelContent>
-  );
-
-  const contentDrawerContent = (
-    <DrawerPanelContent>
-      <DrawerHead>
-        <span>Content Details</span>
-        <DrawerActions>
-          <DrawerCloseButton onClick={onContentDrawerToggle} />
-        </DrawerActions>
-      </DrawerHead>
-      <DrawerPanelBody>
-        <Content component="h3">Content Information</Content>
-        <Content component="p">
-          This drawer contains detailed information about the dashboard content.
-        </Content>
-        <Content component="p">
-          You can add filters, settings, or other content controls here.
-        </Content>
-      </DrawerPanelBody>
-    </DrawerPanelContent>
-  );
-
   return (
     <Fragment>
-      <Drawer isExpanded={isDrawerOpen}>
-        <DrawerContent panelContent={drawerContent}>
-          <CompassPage
-            toolbar={
-              <Flex alignItems={{ default: "alignItemsCenter" }}>
-                <FlexItem grow={{ default: "grow" }}>
-                  <Title headingLevel="h1">Dashboard</Title>
-                </FlexItem>
-                <FlexItem>
-                  <Toolbar hasNoPadding>
-                    <ToolbarContent>
-                      <ToolbarGroup>
-                        <ToolbarItem>
-                          <Button
-                            icon={<BarsIcon />}
-                            variant="plain"
-                            onClick={onDrawerToggle}
-                            aria-label="Toggle drawer"
-                          >
-                            Details
-                          </Button>
-                        </ToolbarItem>
-                        <ToolbarItem>
-                          <Button
-                            icon={<BarsIcon />}
-                            variant="secondary"
-                            onClick={onContentDrawerToggle}
-                            aria-label="Toggle content drawer"
-                          >
-                            Content Details
-                          </Button>
-                        </ToolbarItem>
-                      </ToolbarGroup>
-                    </ToolbarContent>
-                  </Toolbar>
-                </FlexItem>
-              </Flex>
-            }
-            body={
-              <Drawer isExpanded={isContentDrawerOpen}>
-                <DrawerContent panelContent={contentDrawerContent}>
-                  <CompassPageBody
-                    ref={bodyRef}
-                    isPlain
-                    isDashboardBody
-                    pageSectionProps={{
-                      "aria-label": "Detail status events",
-                      className: "pf-m-plain",
-                    }}
-                  >
-                    <AnimationsOverview />
-                  </CompassPageBody>
-                </DrawerContent>
-              </Drawer>
-            }
-          />
-        </DrawerContent>
-      </Drawer>
+      <CompassPage
+        hero={
+          <Content>
+            <h1>Automation that does more</h1>
+            <p>Red Hat Ansible Automation Platform offers more capabilities, accessibility, and flexibility, so you can bring the power of automation to the teams, tasks, and environments that need it. </p>
+            <ActionList>
+              <ActionListItem>
+                <Button variant="primary">Upgrade today</Button>
+              </ActionListItem>
+              <ActionListItem>
+                <Button variant="secondary">Talk to a Red Hatter</Button>
+              </ActionListItem>
+            </ActionList>
+          </Content>
+        }
+        body={
+          <CompassPageBody
+            ref={bodyRef}
+            isPlain
+            isDashboardBody
+            pageSectionProps={{
+              "aria-label": "Detail status events",
+              className: "pf-m-plain",
+            }}
+          >
+            <AnimationsOverview />
+          </CompassPageBody>
+        }
+      />
     </Fragment>
   );
 };
