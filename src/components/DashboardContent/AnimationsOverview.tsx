@@ -82,13 +82,13 @@ const recentActivityCard = (
         actions: (
           <Dropdown
             isOpen={false} // Use a unique index for the header kebab
-            onSelect={() => {}}
-            onOpenChange={() => {}}
+            onSelect={() => { }}
+            onOpenChange={() => { }}
             toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
               <MenuToggle
                 ref={toggleRef}
                 variant="plain"
-                onClick={() => {}}
+                onClick={() => { }}
                 isExpanded={false}
               >
                 <EllipsisVIcon />
@@ -139,12 +139,12 @@ const recentActivityCard = (
                       key={stepIndex}
                       variant={
                         stepVariant as
-                          | "default"
-                          | "success"
-                          | "pending"
-                          | "danger"
-                          | "warning"
-                          | "info"
+                        | "default"
+                        | "success"
+                        | "pending"
+                        | "danger"
+                        | "warning"
+                        | "info"
                       }
                       icon={iconMap[stepVariant as keyof typeof iconMap]}
                       aria-label={`Step ${stepIndex + 1} is ${stepVariant}`}
@@ -155,13 +155,13 @@ const recentActivityCard = (
               <Td isActionCell>
                 <Dropdown
                   isOpen={false}
-                  onSelect={() => {}}
-                  onOpenChange={() => {}}
+                  onSelect={() => { }}
+                  onOpenChange={() => { }}
                   toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
                     <MenuToggle
                       ref={toggleRef}
                       variant="plain"
-                      onClick={() => {}}
+                      onClick={() => { }}
                       isExpanded={false}
                     >
                       <EllipsisVIcon />
@@ -178,7 +178,7 @@ const recentActivityCard = (
   </GlassCard>
 );
 
-export const AnimationsOverview: FunctionComponent = ({}) => {
+export const AnimationsOverview: FunctionComponent = ({ }) => {
   const cards = [
     // Card 1: Performance
     <Card isFullHeight isPlain key="card-1">
@@ -264,15 +264,6 @@ export const AnimationsOverview: FunctionComponent = ({}) => {
   return (
     <Fragment>
       <Grid hasGutter>
-        <GridItem span={12}>
-          <MultiContentCard
-            className="glass"
-            isExpandable={true}
-            withDividers
-            cards={cards}
-            toggleText="What's new in OpenShift?"
-          />
-        </GridItem>
         <GridItem span={12} sm={12} md={6} lg={4} xl={3} rowSpan={4}>
           <GlassCard isFullHeight>
             <CardTitle>
