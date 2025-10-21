@@ -415,3 +415,27 @@ body {
 :where(.pf-v6-theme-dark.pf-background-red) body {
   background-image: url(../assets/rh-wallpaper-dark.png);
 }
+
+@media (max-width: 1200px) {
+  .compass {
+    display: none;
+  }
+  body {
+    display: grid;
+    min-height: 100%;
+    place-content: center;
+
+    &::after {
+      padding: 1em;
+      border-radius: var(--pf-t--global--border--radius--large);
+      background: var(--pf-t--global--background--color--primary--default);
+      content: "This page is optimized for wide screens.\a\a Please view on a larger display and/or make your browser window wider.";
+      width: 80%;
+      max-width: 360px;
+      border: 1px solid var(--pf-t--global--border--color--default);
+      box-shadow: var(--pf-t--global--box-shadow--md);
+      white-space: pre-wrap;
+      text-align: center;
+    }
+  }
+}
