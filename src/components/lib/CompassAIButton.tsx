@@ -4,6 +4,7 @@ import { Button, ButtonProps } from "@patternfly/react-core";
 interface CompassAIButtonProps extends Omit<ButtonProps, "className"> {
   icon?: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 }
 
 export const CompassAIButton: React.FunctionComponent<CompassAIButtonProps> = ({

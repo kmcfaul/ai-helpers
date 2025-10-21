@@ -41,6 +41,7 @@ export const CompassApp: React.FunctionComponent = () => {
   const [activeSubsection, setActiveSubsection] = useState(1);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
+  const [showSouthSection, setShowSouthSection] = useState(true);
 
   const onDropdownSelect = () => {
     setIsDropdownOpen(false);
@@ -55,6 +56,10 @@ export const CompassApp: React.FunctionComponent = () => {
     setTimeout(() => {
       setIsThinking(false);
     }, 10000); // 10 seconds
+  };
+
+  const handleAIToggle = () => {
+    setShowSouthSection(!showSouthSection);
   };
 
   const handleTabClick = (
@@ -174,7 +179,13 @@ export const CompassApp: React.FunctionComponent = () => {
         </ActionListItem>
       </ActionListGroup>
       <ActionListItem>
-        <CompassAIButton icon={<RHAiExperienceIcon />} />
+        <CompassAIButton
+          icon={<RHAiExperienceIcon />}
+          onClick={handleAIToggle}
+          aria-label={
+            showSouthSection ? "Hide AI Assistant" : "Show AI Assistant"
+          }
+        />
       </ActionListItem>
       <ActionListGroup>
         <ActionListItem>
@@ -236,7 +247,7 @@ export const CompassApp: React.FunctionComponent = () => {
       west={westContent}
       center={centerContent}
       east={eastContent}
-      south={southContent}
+      south={showSouthSection ? southContent : undefined}
     />
   );
 };
