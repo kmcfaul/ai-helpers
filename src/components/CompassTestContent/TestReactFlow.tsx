@@ -12,6 +12,7 @@ import {
 } from "@xyflow/react";
 
 import "@xyflow/react/dist/style.css";
+import "./reactFlowOverrides.css"
 import PFCardNode from "./PFCardNode";
 
 const initialNodes = [
