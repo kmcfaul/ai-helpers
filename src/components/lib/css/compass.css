@@ -23,7 +23,11 @@
   --compass--message-bar--min-width: 300px;
   --compass--message-bar--max-width: 600px;
   --compass--feather--length: 20px;
-  --compass__hero--bgimage: url("../images/hero-bg.png")
+  --compass__hero--bgimage: url("../assets/hero-bg.png");
+  --compass__hero--gradient--angle: 289deg;
+  --compass__hero--gradient--stop-1: #000;
+  --compass__hero--gradient--stop-2: #1b0d33;
+  --compass__hero--gradient--stop-3: #3d2785;
   --thinking--spread: 0px;
   --thinking--spread--pulse: 15px;
 
@@ -55,7 +59,13 @@
   border: var(--pf-t--global--border--width--regular) solid var(--pf-t--global--border--color--alt);
   display: flex;
   padding: 32px 0 32px 72px;
-  background-image: var(--compass__hero--bgimage), linear-gradient(289deg, #000 0%, #1b0d33 50%, #3d2785 100%);
+  background-image: var(--compass__hero--bgimage),
+    linear-gradient(
+      var(--compass__hero--gradient--angle),
+      var(--compass__hero--gradient--stop-1) 0%,
+      var(--compass__hero--gradient--stop-2) 50%,
+      var(--compass__hero--gradient--stop-3) 100%
+    );
   background-position: right center;
   background-size: contain;
   background-repeat: no-repeat;
