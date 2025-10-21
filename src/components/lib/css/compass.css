@@ -7,7 +7,7 @@
 /* compass layout */
 .compass {
   --compass--padding: var(--pf-t--global--spacer--xl);
-  --compass--max-width: 1710px;
+  --compass--max-width: 100%;
   --compass--row-gap: var(--pf-t--global--spacer--xl);
   --compass--column-gap: var(--pf-t--global--spacer--xl);
   --compass--nav--row-gap: var(--pf-t--global--spacer--md);
