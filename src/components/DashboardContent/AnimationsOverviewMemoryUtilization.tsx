@@ -45,8 +45,8 @@ export const MemoryUtilizationCard: React.FunctionComponent = () => {
   );
 
   return (
-    <Glass>
-      <Card isPlain>
+    <Glass className="pf-m-full-height">
+      <Card isPlain isFullHeight>
         <CardHeader
           actions={{
             actions: (

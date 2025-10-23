@@ -119,6 +119,7 @@ export const CompassApp: React.FunctionComponent = () => {
       activeKey={activeSubsection}
       isSubtab
       onSelect={handleSubsectionClick}
+      className="glass"
     >
       <Tab
         eventKey={0}
@@ -145,6 +146,7 @@ export const CompassApp: React.FunctionComponent = () => {
       onSelect={handleTabClick}
       component={TabsComponent.nav}
       aria-label="Tabs in the nav element example"
+      className="glass"
     >
       <Tab eventKey={0} title={<TabTitleText>Dashboard</TabTitleText>} />
       <Tab

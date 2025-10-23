@@ -71,8 +71,8 @@ const iconMap = {
 };
 
 const recentActivityCard = (
-  <Glass>
-    <Card isPlain>
+  <Glass className="pf-m-full-height">
+    <Card isPlain isFullHeight>
       <CardHeader
         actions={{
           actions: (
@@ -180,7 +180,7 @@ export const AnimationsOverview: FunctionComponent = ({ }) => {
     <Fragment>
       <Grid hasGutter>
         <GridItem span={12} sm={12} md={6} lg={4} xl={3} rowSpan={4}>
-          <Glass>
+          <Glass className="pf-m-full-height">
             <Card isPlain>
               <CardTitle>
                 <Title headingLevel="h4" size="xl">

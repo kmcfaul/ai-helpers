@@ -168,7 +168,6 @@
 }
 
 .glass,
-.pf-v6-c-tabs,
 .pf-v6-c-compass__nav--primary,
 .pf-v6-c-compass__nav--secondary,
 .pf-v6-c-compass__panel,
@@ -207,6 +206,10 @@
 .glass {
   &.pf-m-no-border {
     border-width: 0;
+  }
+
+  &.pf-m-full-height {
+    height: 100%;
   }
 }
 

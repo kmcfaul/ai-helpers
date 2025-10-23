@@ -57,8 +57,8 @@ export const ClusterInventoryCard: React.FunctionComponent = () => {
   return (
     // To match the dark theme in your screenshot, we wrap the card in a div with a dark background.
     // The `isPlain` and `isFlat` props on the Card remove its default background and shadow so it blends in.
-    <Glass>
-      <Card isPlain>
+    <Glass className="pf-m-full-height">
+      <Card isPlain isFullHeight>
         <CardHeader
           // We use a Flex layout in the header to position the title and actions
           actions={{

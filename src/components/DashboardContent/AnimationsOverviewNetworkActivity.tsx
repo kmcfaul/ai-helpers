@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Card,
   CardHeader,
   CardTitle,
   CardBody,
@@ -9,7 +10,7 @@ import {
   MenuToggle,
   Flex,
 } from "@patternfly/react-core";
-import { GlassCard } from "../lib/GlassCard";
+import { Glass } from "../lib/Glass";
 
 import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
 import NetworkIcon from "@patternfly/react-icons/dist/esm/icons/network-icon";
@@ -64,68 +65,70 @@ export const NetworkActivityCard: React.FunctionComponent = () => {
     // To match the dark theme, we wrap the card in a div with a dark background.
     // The `isPlain` and `isFlat` props on the Card remove its default styling.
     <div>
-      <GlassCard component="div" isFullHeight>
-        <CardHeader
-          actions={{
-            actions: (
-              <Dropdown
-                isOpen={isKebabOpen}
-                onSelect={() => setIsKebabOpen(false)}
-                onOpenChange={(isOpen: boolean) => setIsKebabOpen(isOpen)}
-                toggle={kebabToggle}
-                popperProps={{ position: "right" }}
-              >
-                <DropdownList>{dropdownItems}</DropdownList>
-              </Dropdown>
-            ),
-            hasNoOffset: false,
-            className: "",
-          }}
-        >
-          <CardTitle>
-            <Flex alignItems={{ default: "alignItemsCenter" }}>
-              <NetworkIcon />
-              <span>Network activity</span>
-            </Flex>
-          </CardTitle>
-        </CardHeader>
-        <CardBody>
-          <Chart
-            ariaDesc="Network activity chart"
-            ariaTitle="Network activity chart"
-            containerComponent={
-              <ChartVoronoiContainer
-                labels={({ datum }) => `${datum.name}: ${datum.y}`}
-                constrainToVisibleArea
-              />
-            }
-            height={250}
-            padding={{
-              bottom: 50,
-              left: 50,
-              right: 20,
-              top: 20,
+      <Glass className="pf-m-full-height">
+        <Card className="pf-m-full-height">
+          <CardHeader
+            actions={{
+              actions: (
+                <Dropdown
+                  isOpen={isKebabOpen}
+                  onSelect={() => setIsKebabOpen(false)}
+                  onOpenChange={(isOpen: boolean) => setIsKebabOpen(isOpen)}
+                  toggle={kebabToggle}
+                  popperProps={{ position: "right" }}
+                >
+                  <DropdownList>{dropdownItems}</DropdownList>
+                </Dropdown>
+              ),
+              hasNoOffset: false,
+              className: "",
             }}
-            themeColor={ChartThemeColor.multi}
-            width={400}
           >
-            <ChartAxis />
-            <ChartAxis dependentAxis showGrid />
-            <ChartGroup>
-              <ChartArea
-                data={chartData}
-                interpolation="catmullRom" // This creates the smooth curve
-                style={{
-                  data: {
-                    stroke: "#0066CC", // Line color
-                    fill: "rgba(0, 102, 204, 0.4)", // Area fill color with opacity
-                  },
-                }}
-              />
-            </ChartGroup>
-          </Chart>
-        </CardBody>
-      </GlassCard>
+            <CardTitle>
+              <Flex alignItems={{ default: "alignItemsCenter" }}>
+                <NetworkIcon />
+                <span>Network activity</span>
+              </Flex>
+            </CardTitle>
+          </CardHeader>
+          <CardBody>
+            <Chart
+              ariaDesc="Network activity chart"
+              ariaTitle="Network activity chart"
+              containerComponent={
+                <ChartVoronoiContainer
+                  labels={({ datum }) => `${datum.name}: ${datum.y}`}
+                  constrainToVisibleArea
+                />
+              }
+              height={250}
+              padding={{
+                bottom: 50,
+                left: 50,
+                right: 20,
+                top: 20,
+              }}
+              themeColor={ChartThemeColor.multi}
+              width={400}
+            >
+              <ChartAxis />
+              <ChartAxis dependentAxis showGrid />
+              <ChartGroup>
+                <ChartArea
+                  data={chartData}
+                  interpolation="catmullRom" // This creates the smooth curve
+                  style={{
+                    data: {
+                      stroke: "#0066CC", // Line color
+                      fill: "rgba(0, 102, 204, 0.4)", // Area fill color with opacity
+                    },
+                  }}
+                />
+              </ChartGroup>
+            </Chart>
+          </CardBody>
+        </Card>
+      </Glass>
     </div>
   );
 };
