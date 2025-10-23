@@ -1,13 +1,20 @@
-import React from "react";
+import { css } from "@patternfly/react-styles";
 
-interface CompassSectionProps {
+interface CompassSectionProps extends React.HTMLProps<HTMLDivElement> {
+  /** Additional classes added to the section. */
+  className?: string;
+  /** Content of the section. */
   children: React.ReactNode;
 }
 
 export const CompassSection: React.FunctionComponent<CompassSectionProps> = ({
   children,
-}) => {
-  return <div className="pf-v6-c-compass__section">{children}</div>;
-};
+  className,
+  ...props
+}) => (
+  <div className={css("pf-v6-c-compass__section", className)} {...props}>
+    {children}
+  </div>
+);
 
 CompassSection.displayName = "CompassSection";

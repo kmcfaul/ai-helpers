@@ -1,18 +1,27 @@
 import { Flex, FlexItem } from "@patternfly/react-core";
-import React from "react";
+import { css } from "@patternfly/react-styles";
 
-interface CompassMainHeaderProps {
+interface CompassMainHeaderProps
+  extends Omit<React.HTMLProps<HTMLDivElement>, "title"> {
+  /** Additional classes added to the main header. */
+  className?: string;
+  /** Styled title. If title or toolbar is provided, the children will be ignored. */
   title?: React.ReactNode;
+  /** Styled toolbar. If title or toolbar is provided, the children will be ignored. */
   toolbar?: React.ReactNode;
+  /** Custom main header content. To opt into a default set of styling, use the title and toolbar props instead. */
   children?: React.ReactNode;
 }
 
 export const CompassMainHeader: React.FunctionComponent<
   CompassMainHeaderProps
-> = ({ title, toolbar, children }) => {
+> = ({ className, title, toolbar, children, ...props }) => {
   if (title !== undefined || toolbar !== undefined) {
     return (
-      <div className="pf-v6-c-compass__main-header">
+      <div
+        className={css("pf-v6-c-compass__main-header", className)}
+        {...props}
+      >
         <Flex alignItems={{ default: "alignItemsCenter" }}>
           <FlexItem grow={{ default: "grow" }}>{title}</FlexItem>
           <FlexItem>{toolbar}</FlexItem>
@@ -21,7 +30,11 @@ export const CompassMainHeader: React.FunctionComponent<
     );
   }
 
-  return <div className="pf-v6-c-compass__main-header">{children}</div>;
+  return (
+    <div className={css("pf-v6-c-compass__main-header", className)} {...props}>
+      {children}
+    </div>
+  );
 };
 
 CompassMainHeader.displayName = "CompassMainHeader";
