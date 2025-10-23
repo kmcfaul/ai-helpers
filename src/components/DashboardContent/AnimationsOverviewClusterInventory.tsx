@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Card,
   CardHeader,
   CardTitle,
   CardBody,
@@ -13,8 +14,8 @@ import {
   Button,
   Icon,
 } from "@patternfly/react-core";
-import { GlassCard } from "../lib/GlassCard";
 
+import { Glass } from "../lib/Glass";
 import ListIcon from "@patternfly/react-icons/dist/esm/icons/list-icon";
 import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
 import CubesIcon from "@patternfly/react-icons/dist/esm/icons/cubes-icon";
@@ -56,66 +57,68 @@ export const ClusterInventoryCard: React.FunctionComponent = () => {
   return (
     // To match the dark theme in your screenshot, we wrap the card in a div with a dark background.
     // The `isPlain` and `isFlat` props on the Card remove its default background and shadow so it blends in.
-    <GlassCard component="div" isFullHeight>
-      <CardHeader
-        // We use a Flex layout in the header to position the title and actions
-        actions={{
-          actions: (
-            <Dropdown
-              isOpen={isKebabOpen}
-              onSelect={() => setIsKebabOpen(false)}
-              onOpenChange={(isOpen: boolean) => setIsKebabOpen(isOpen)}
-              toggle={kebabToggle}
-              popperProps={{ position: "right" }}
-            >
-              <DropdownList>{dropdownItems}</DropdownList>
-            </Dropdown>
-          ),
-          hasNoOffset: false,
-          className: "",
-        }}
-      >
-        <CardTitle>
-          <Flex alignItems={{ default: "alignItemsCenter" }}>
-            <ListIcon />
-            <span> Cluster inventory</span>
-          </Flex>
-        </CardTitle>
-      </CardHeader>
-      <CardBody>
-        {/* We use another Flex layout with column direction to stack the inventory items */}
-        <Flex
-          direction={{ default: "column" }}
-          spaceItems={{ default: "spaceItemsMd" }}
-        >
-          {inventoryItems.map((item, index) => (
-            <FlexItem key={index}>
-              <Flex
-                alignItems={{ default: "alignItemsCenter" }}
-                spaceItems={{ default: "spaceItemsSm" }}
+    <Glass>
+      <Card isPlain>
+        <CardHeader
+          // We use a Flex layout in the header to position the title and actions
+          actions={{
+            actions: (
+              <Dropdown
+                isOpen={isKebabOpen}
+                onSelect={() => setIsKebabOpen(false)}
+                onOpenChange={(isOpen: boolean) => setIsKebabOpen(isOpen)}
+                toggle={kebabToggle}
+                popperProps={{ position: "right" }}
               >
-                <FlexItem>
-                  <Icon>{item.icon}</Icon>
-                </FlexItem>
-                <FlexItem>{item.text}</FlexItem>
-              </Flex>
-            </FlexItem>
-          ))}
-        </Flex>
-      </CardBody>
-      <CardFooter>
-        <Button
-          variant="link"
-          isInline
-          icon={<ArrowRightIcon />}
-          iconPosition="end"
-          component="a"
-          href="#"
+                <DropdownList>{dropdownItems}</DropdownList>
+              </Dropdown>
+            ),
+            hasNoOffset: false,
+            className: "",
+          }}
         >
-          Cluster details page
-        </Button>
-      </CardFooter>
-    </GlassCard>
+          <CardTitle>
+            <Flex alignItems={{ default: "alignItemsCenter" }}>
+              <ListIcon />
+              <span> Cluster inventory</span>
+            </Flex>
+          </CardTitle>
+        </CardHeader>
+        <CardBody>
+          {/* We use another Flex layout with column direction to stack the inventory items */}
+          <Flex
+            direction={{ default: "column" }}
+            spaceItems={{ default: "spaceItemsMd" }}
+          >
+            {inventoryItems.map((item, index) => (
+              <FlexItem key={index}>
+                <Flex
+                  alignItems={{ default: "alignItemsCenter" }}
+                  spaceItems={{ default: "spaceItemsSm" }}
+                >
+                  <FlexItem>
+                    <Icon>{item.icon}</Icon>
+                  </FlexItem>
+                  <FlexItem>{item.text}</FlexItem>
+                </Flex>
+              </FlexItem>
+            ))}
+          </Flex>
+        </CardBody>
+        <CardFooter>
+          <Button
+            variant="link"
+            isInline
+            icon={<ArrowRightIcon />}
+            iconPosition="end"
+            component="a"
+            href="#"
+          >
+            Cluster details page
+          </Button>
+        </CardFooter>
+      </Card>
+    </Glass>
   );
 };
 ClusterInventoryCard.displayName = "ClusterInventoryCard";

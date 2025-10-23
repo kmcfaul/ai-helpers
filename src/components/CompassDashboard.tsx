@@ -8,7 +8,6 @@ import {
 import { AnimationsOverview } from "./DashboardContent/AnimationsOverview";
 import { CompassHero } from "./lib/CompassHero";
 import { CompassContent } from "./lib/CompassContent";
-import { CompassSection } from "./lib/CompassSection";
 
 export const CompassDashboard: React.FunctionComponent = () => {
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -68,7 +67,7 @@ export const CompassDashboard: React.FunctionComponent = () => {
           <p>
             Red Hat Ansible Automation Platform offers more capabilities,
             accessibility, and flexibility, so you can bring the power of
-            automation to the teams, tasks, and environments that need it. 
+            automation to the teams, tasks, and environments that need it.
           </p>
           <ActionList>
             <ActionListItem>
@@ -81,9 +80,7 @@ export const CompassDashboard: React.FunctionComponent = () => {
         </Content>
       </CompassHero>
       <CompassContent>
-        <CompassSection>
-          <AnimationsOverview />
-        </CompassSection>
+        <AnimationsOverview />
       </CompassContent>
       {/* <CompassPage
         body={

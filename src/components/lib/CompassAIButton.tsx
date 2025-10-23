@@ -13,8 +13,8 @@ export const CompassAIButton: React.FunctionComponent<CompassAIButtonProps> = ({
   ...buttonProps
 }) => {
   const combinedClassName = className
-    ? `compass__sparkle ai-border ${className}`
-    : "compass__sparkle ai-border";
+    ? `pf-v6-c-compass__sparkle ai-border ${className}`
+    : "pf-v6-c-compass__sparkle ai-border";
 
   return (
     <Button

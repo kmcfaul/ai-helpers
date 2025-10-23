@@ -19,6 +19,7 @@ import {
   Pagination,
   Flex,
   FlexItem,
+  Grid,
   Title,
   DescriptionList,
   DescriptionListGroup,
@@ -264,7 +265,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
             select: {
               index,
               rowIndex: index,
-              onSelect: () => {},
+              onSelect: () => { },
               isSelected: false,
             },
           },
@@ -276,12 +277,12 @@ export const CompassIntegrations: React.FunctionComponent = () => {
             <Label
               status={
                 status as
-                  | "success"
-                  | "danger"
-                  | "warning"
-                  | "info"
-                  | "custom"
-                  | undefined
+                | "success"
+                | "danger"
+                | "warning"
+                | "info"
+                | "custom"
+                | undefined
               }
               isCompact
               variant="outline"
@@ -303,7 +304,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
       cell: undefined,
       props: {
         select: {
-          onSelect: () => {},
+          onSelect: () => { },
           isSelected: false,
         },
       },
@@ -348,9 +349,9 @@ export const CompassIntegrations: React.FunctionComponent = () => {
               itemCount={523}
               perPage={20}
               page={1}
-              onSetPage={() => {}}
+              onSetPage={() => { }}
               widgetId="pagination-options-card-view"
-              onPerPageSelect={() => {}}
+              onPerPageSelect={() => { }}
               isCompact
             />
           </ToolbarItem>
@@ -370,7 +371,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
                   <>
                     <Dropdown
                       isOpen={false}
-                      onOpenChange={() => {}}
+                      onOpenChange={() => { }}
                       toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
                         <MenuToggle
                           ref={toggleRef}
@@ -397,12 +398,12 @@ export const CompassIntegrations: React.FunctionComponent = () => {
                     <Label
                       status={
                         product.status as
-                          | "success"
-                          | "danger"
-                          | "warning"
-                          | "info"
-                          | "custom"
-                          | undefined
+                        | "success"
+                        | "danger"
+                        | "warning"
+                        | "info"
+                        | "custom"
+                        | undefined
                       }
                       isCompact
                       variant="outline"
@@ -428,7 +429,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
   const dataViewIntegration = (
     <>
       <DataViewToolbar
-        clearAllFilters={() => {}}
+        clearAllFilters={() => { }}
         filters={
           <DataViewTextFilter
             filterId="name"
@@ -469,282 +470,278 @@ export const CompassIntegrations: React.FunctionComponent = () => {
   // refactor into a GlassPanels component? Prop is an array of reactnode that are PageSection content and internal component provides the Glass and PageSection with hasOverflowScroll
   const addIntegration = (
     <>
-      <Glass>
-        <CompassSection>
-          <Content component="h2">Configure integration</Content>
-          <Form>
-            <FormGroup
-              label="Integration type"
-              labelHelp={
-                <Popover
-                  triggerRef={integrationTypeHelpRef}
-                  headerContent={<div>test</div>}
-                  bodyContent={<div>test</div>}
-                >
-                  <FormGroupLabelHelp
-                    ref={integrationTypeHelpRef}
-                    aria-label="More info for type field"
-                  />
-                </Popover>
-              }
-              isRequired
-              fieldId="form-type"
-            >
-              <Gallery hasGutter>
-                <Card id="tile-example-1" isSelectable isSelected={true}>
-                  <CardHeader
-                    selectableActions={{
-                      selectableActionId: "id1",
-                      selectableActionAriaLabelledby: "tile-example-1",
-                      name: "id1",
-                      variant: "single",
-                      onChange: () => {},
-                      isHidden: true,
-                    }}
-                  >
-                    <Flex
-                      gap={{ default: "gapSm" }}
-                      justifyContent={{ default: "justifyContentCenter" }}
-                    >
-                      <Icon size="xl">
-                        <RHServerStackIcon />
-                      </Icon>
-                    </Flex>
-                  </CardHeader>
-                  <CardBody>
-                    <Flex
-                      gap={{ default: "gapSm" }}
-                      justifyContent={{ default: "justifyContentCenter" }}
-                    >
-                      MCP Server
-                    </Flex>
-                  </CardBody>
-                </Card>
-                <Card id="tile-example-2" isSelectable isSelected={false}>
-                  <CardHeader
-                    selectableActions={{
-                      selectableActionId: "id2",
-                      selectableActionAriaLabelledby: "tile-example-2",
-                      name: "id2",
-                      variant: "single",
-                      onChange: () => {},
-                      isHidden: true,
-                    }}
-                  >
-                    <Flex
-                      gap={{ default: "gapSm" }}
-                      justifyContent={{ default: "justifyContentCenter" }}
-                    >
-                      <Icon size="xl">
-                        <RHServerStackIcon />
-                      </Icon>
-                    </Flex>
-                  </CardHeader>
-                  <CardBody>
-                    <Flex
-                      gap={{ default: "gapSm" }}
-                      justifyContent={{ default: "justifyContentCenter" }}
-                    >
-                      [integration type]
-                    </Flex>
-                  </CardBody>
-                </Card>
-                <Card id="tile-example-3" isSelectable isSelected={false}>
-                  <CardHeader
-                    selectableActions={{
-                      selectableActionId: "id3",
-                      selectableActionAriaLabelledby: "tile-example-3",
-                      name: "id3",
-                      variant: "single",
-                      onChange: () => {},
-                      isHidden: true,
-                    }}
-                  >
-                    <Flex
-                      gap={{ default: "gapSm" }}
-                      justifyContent={{ default: "justifyContentCenter" }}
-                    >
-                      <Icon size="xl">
-                        <RHServerStackIcon />
-                      </Icon>
-                    </Flex>
-                  </CardHeader>
-                  <CardBody>
-                    <Flex
-                      gap={{ default: "gapSm" }}
-                      justifyContent={{ default: "justifyContentCenter" }}
-                    >
-                      [integration type]
-                    </Flex>
-                  </CardBody>
-                </Card>
-                <Card
-                  id="tile-example-4"
-                  isSelectable
-                  isDisabled
-                  isSelected={false}
-                >
-                  <CardHeader
-                    selectableActions={{
-                      selectableActionId: "id4",
-                      selectableActionAriaLabelledby: "tile-example-4",
-                      name: "id4",
-                      variant: "single",
-                      onChange: () => {},
-                      isHidden: true,
-                    }}
-                  >
-                    <Flex
-                      gap={{ default: "gapSm" }}
-                      justifyContent={{ default: "justifyContentCenter" }}
-                    >
-                      <Icon size="xl">
-                        <RHServerStackIcon />
-                      </Icon>
-                    </Flex>
-                  </CardHeader>
-                  <CardBody>
-                    <Flex
-                      gap={{ default: "gapSm" }}
-                      justifyContent={{ default: "justifyContentCenter" }}
-                    >
-                      [integration type]
-                    </Flex>
-                  </CardBody>
-                </Card>
-              </Gallery>
-            </FormGroup>
-            <FormGroup
-              label="Full name"
-              labelHelp={
-                <Popover
-                  triggerRef={nameHelpRef}
-                  headerContent={<div>test</div>}
-                  bodyContent={<div>test</div>}
-                >
-                  <FormGroupLabelHelp
-                    ref={nameHelpRef}
-                    aria-label="More info for name field"
-                  />
-                </Popover>
-              }
-              isRequired
-              fieldId="form-name"
-            >
-              <TextInput
-                isRequired
-                type="text"
-                id="form-name"
-                name="form-name"
-                value="Pineapple"
-                onChange={() => {}}
-              />
-            </FormGroup>
-            <FormGroup
-              label="Server name / ID"
-              isRequired
-              fieldId="form-server"
-              labelHelp={
-                <Popover
-                  triggerRef={serverHelpRef}
-                  headerContent={<div>test</div>}
-                  bodyContent={<div>test</div>}
-                >
-                  <FormGroupLabelHelp
-                    ref={serverHelpRef}
-                    aria-label="More info for server field"
-                  />
-                </Popover>
-              }
-            >
-              <TextInput
-                isRequired
-                type="text"
-                id="form-server"
-                name="form-server"
-                value="https://example.com"
-                onChange={() => {}}
-              />
-              <FormHelperText>
-                <HelperText>
-                  <HelperTextItem>Other help text.</HelperTextItem>
-                </HelperText>
-              </FormHelperText>
-            </FormGroup>
-            <FormGroup
-              label="Server type"
-              fieldId="form-server-type"
-              labelHelp={
-                <Popover
-                  triggerRef={serverTypeHelpRef}
-                  headerContent={<div>test</div>}
-                  bodyContent={<div>test</div>}
-                >
-                  <FormGroupLabelHelp
-                    ref={serverTypeHelpRef}
-                    aria-label="More info for server type field"
-                  />
-                </Popover>
-              }
-            >
-              <MenuToggle isFullWidth>Resource type</MenuToggle>
-            </FormGroup>
-            <ActionGroup>
-              <Button
-                variant="primary"
-                onChange={() => {
-                  setActiveDisplay("grid");
-                }}
+      <CompassSection>
+        <Content component="h2">Configure integration</Content>
+        <Form>
+          <FormGroup
+            label="Integration type"
+            labelHelp={
+              <Popover
+                triggerRef={integrationTypeHelpRef}
+                headerContent={<div>test</div>}
+                bodyContent={<div>test</div>}
               >
-                Add integration
-              </Button>
-              <Button
-                variant="secondary"
-                onChange={() => {
-                  setActiveDisplay("grid");
-                }}
+                <FormGroupLabelHelp
+                  ref={integrationTypeHelpRef}
+                  aria-label="More info for type field"
+                />
+              </Popover>
+            }
+            isRequired
+            fieldId="form-type"
+          >
+            <Gallery hasGutter>
+              <Card id="tile-example-1" isSelectable isSelected={true}>
+                <CardHeader
+                  selectableActions={{
+                    selectableActionId: "id1",
+                    selectableActionAriaLabelledby: "tile-example-1",
+                    name: "id1",
+                    variant: "single",
+                    onChange: () => { },
+                    isHidden: true,
+                  }}
+                >
+                  <Flex
+                    gap={{ default: "gapSm" }}
+                    justifyContent={{ default: "justifyContentCenter" }}
+                  >
+                    <Icon size="xl">
+                      <RHServerStackIcon />
+                    </Icon>
+                  </Flex>
+                </CardHeader>
+                <CardBody>
+                  <Flex
+                    gap={{ default: "gapSm" }}
+                    justifyContent={{ default: "justifyContentCenter" }}
+                  >
+                    MCP Server
+                  </Flex>
+                </CardBody>
+              </Card>
+              <Card id="tile-example-2" isSelectable isSelected={false}>
+                <CardHeader
+                  selectableActions={{
+                    selectableActionId: "id2",
+                    selectableActionAriaLabelledby: "tile-example-2",
+                    name: "id2",
+                    variant: "single",
+                    onChange: () => { },
+                    isHidden: true,
+                  }}
+                >
+                  <Flex
+                    gap={{ default: "gapSm" }}
+                    justifyContent={{ default: "justifyContentCenter" }}
+                  >
+                    <Icon size="xl">
+                      <RHServerStackIcon />
+                    </Icon>
+                  </Flex>
+                </CardHeader>
+                <CardBody>
+                  <Flex
+                    gap={{ default: "gapSm" }}
+                    justifyContent={{ default: "justifyContentCenter" }}
+                  >
+                    [integration type]
+                  </Flex>
+                </CardBody>
+              </Card>
+              <Card id="tile-example-3" isSelectable isSelected={false}>
+                <CardHeader
+                  selectableActions={{
+                    selectableActionId: "id3",
+                    selectableActionAriaLabelledby: "tile-example-3",
+                    name: "id3",
+                    variant: "single",
+                    onChange: () => { },
+                    isHidden: true,
+                  }}
+                >
+                  <Flex
+                    gap={{ default: "gapSm" }}
+                    justifyContent={{ default: "justifyContentCenter" }}
+                  >
+                    <Icon size="xl">
+                      <RHServerStackIcon />
+                    </Icon>
+                  </Flex>
+                </CardHeader>
+                <CardBody>
+                  <Flex
+                    gap={{ default: "gapSm" }}
+                    justifyContent={{ default: "justifyContentCenter" }}
+                  >
+                    [integration type]
+                  </Flex>
+                </CardBody>
+              </Card>
+              <Card
+                id="tile-example-4"
+                isSelectable
+                isDisabled
+                isSelected={false}
               >
-                Test integration
-              </Button>
-              <Button
-                variant="link"
-                onChange={() => {
-                  setActiveDisplay("grid");
-                }}
+                <CardHeader
+                  selectableActions={{
+                    selectableActionId: "id4",
+                    selectableActionAriaLabelledby: "tile-example-4",
+                    name: "id4",
+                    variant: "single",
+                    onChange: () => { },
+                    isHidden: true,
+                  }}
+                >
+                  <Flex
+                    gap={{ default: "gapSm" }}
+                    justifyContent={{ default: "justifyContentCenter" }}
+                  >
+                    <Icon size="xl">
+                      <RHServerStackIcon />
+                    </Icon>
+                  </Flex>
+                </CardHeader>
+                <CardBody>
+                  <Flex
+                    gap={{ default: "gapSm" }}
+                    justifyContent={{ default: "justifyContentCenter" }}
+                  >
+                    [integration type]
+                  </Flex>
+                </CardBody>
+              </Card>
+            </Gallery>
+          </FormGroup>
+          <FormGroup
+            label="Full name"
+            labelHelp={
+              <Popover
+                triggerRef={nameHelpRef}
+                headerContent={<div>test</div>}
+                bodyContent={<div>test</div>}
               >
-                Cancel
-              </Button>
-            </ActionGroup>
-          </Form>
-        </CompassSection>
-      </Glass>
-      <Glass>
-        <CompassSection>
-          <Flex alignItems={{ default: "alignItemsCenter" }}>
-            <FlexItem grow={{ default: "grow" }}>
-              <Title headingLevel="h2">
-                Enable tools <Badge>161</Badge>
-              </Title>
-            </FlexItem>
-            <FlexItem>
-              <Toolbar hasNoPadding>
-                <ToolbarContent>
-                  <ToolbarGroup>
-                    <ToolbarItem>
-                      <SearchInput
-                        aria-label="Integrations example search input"
-                        placeholder="Search tools"
-                      />
-                    </ToolbarItem>
-                  </ToolbarGroup>
-                </ToolbarContent>
-              </Toolbar>
-            </FlexItem>
-          </Flex>
-          <SwitchToolTable />
-          <CompassFooter>161 tools selected</CompassFooter>
-        </CompassSection>
-      </Glass>
+                <FormGroupLabelHelp
+                  ref={nameHelpRef}
+                  aria-label="More info for name field"
+                />
+              </Popover>
+            }
+            isRequired
+            fieldId="form-name"
+          >
+            <TextInput
+              isRequired
+              type="text"
+              id="form-name"
+              name="form-name"
+              value="Pineapple"
+              onChange={() => { }}
+            />
+          </FormGroup>
+          <FormGroup
+            label="Server name / ID"
+            isRequired
+            fieldId="form-server"
+            labelHelp={
+              <Popover
+                triggerRef={serverHelpRef}
+                headerContent={<div>test</div>}
+                bodyContent={<div>test</div>}
+              >
+                <FormGroupLabelHelp
+                  ref={serverHelpRef}
+                  aria-label="More info for server field"
+                />
+              </Popover>
+            }
+          >
+            <TextInput
+              isRequired
+              type="text"
+              id="form-server"
+              name="form-server"
+              value="https://example.com"
+              onChange={() => { }}
+            />
+            <FormHelperText>
+              <HelperText>
+                <HelperTextItem>Other help text.</HelperTextItem>
+              </HelperText>
+            </FormHelperText>
+          </FormGroup>
+          <FormGroup
+            label="Server type"
+            fieldId="form-server-type"
+            labelHelp={
+              <Popover
+                triggerRef={serverTypeHelpRef}
+                headerContent={<div>test</div>}
+                bodyContent={<div>test</div>}
+              >
+                <FormGroupLabelHelp
+                  ref={serverTypeHelpRef}
+                  aria-label="More info for server type field"
+                />
+              </Popover>
+            }
+          >
+            <MenuToggle isFullWidth>Resource type</MenuToggle>
+          </FormGroup>
+          <ActionGroup>
+            <Button
+              variant="primary"
+              onChange={() => {
+                setActiveDisplay("grid");
+              }}
+            >
+              Add integration
+            </Button>
+            <Button
+              variant="secondary"
+              onChange={() => {
+                setActiveDisplay("grid");
+              }}
+            >
+              Test integration
+            </Button>
+            <Button
+              variant="link"
+              onChange={() => {
+                setActiveDisplay("grid");
+              }}
+            >
+              Cancel
+            </Button>
+          </ActionGroup>
+        </Form>
+      </CompassSection>
+      <CompassSection>
+        <Flex alignItems={{ default: "alignItemsCenter" }}>
+          <FlexItem grow={{ default: "grow" }}>
+            <Title headingLevel="h2">
+              Enable tools <Badge>161</Badge>
+            </Title>
+          </FlexItem>
+          <FlexItem>
+            <Toolbar hasNoPadding>
+              <ToolbarContent>
+                <ToolbarGroup>
+                  <ToolbarItem>
+                    <SearchInput
+                      aria-label="Integrations example search input"
+                      placeholder="Search tools"
+                    />
+                  </ToolbarItem>
+                </ToolbarGroup>
+              </ToolbarContent>
+            </Toolbar>
+          </FlexItem>
+        </Flex>
+        <SwitchToolTable />
+        <CompassFooter>161 tools selected</CompassFooter>
+      </CompassSection>
     </>
   );
 
@@ -827,7 +824,7 @@ export const CompassIntegrations: React.FunctionComponent = () => {
       <CompassContent>
         {(() => {
           if (activeDisplay === "add") {
-            return <Flex>{addIntegration}</Flex>;
+            return <Grid hasGutter span={6} style={{ 'maxHeight': '100%' }}>{addIntegration}</Grid>;
           } else if (activeDisplay === "list") {
             return <CompassSection>{dataViewIntegration}</CompassSection>;
           } else {

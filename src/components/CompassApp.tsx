@@ -29,6 +29,7 @@ import { CompassDashboard } from "./CompassDashboard";
 import { CompassContentPage } from "./CompassContentPage";
 import { CompassTestPage } from "./CompassTestContent/CompassTestPage";
 
+import { Glass } from "./lib/Glass";
 import { Compass } from "./lib/Compass";
 import { VerticalActionList } from "./lib/VerticalActionList";
 import { CompassHeader } from "./lib/CompassHeader";
@@ -158,7 +159,7 @@ export const CompassApp: React.FunctionComponent = () => {
         isDisabled
       />
       <Tab eventKey={4} title={<TabTitleText>Configuration</TabTitleText>}>
-        <div className="pf-u-glass">{subTabs}</div>
+        {subTabs}
       </Tab>
       <Tab eventKey={5} title={<TabTitleText>Test Page</TabTitleText>} />
     </Tabs>
@@ -232,13 +233,15 @@ export const CompassApp: React.FunctionComponent = () => {
   );
 
   const southContent = (
-    <MessageBar
-      className={`ai-border ${isThinking ? "thinking" : ""}`}
-      isCompact
-      onSendMessage={handleSendMessage}
-      alwayShowSendButton
-      hasAttachButton={false}
-    />
+    <Glass className="pf-m-no-border">
+      <MessageBar
+        className={`ai-border ${isThinking ? "thinking" : ""}`}
+        isCompact
+        onSendMessage={handleSendMessage}
+        alwayShowSendButton
+        hasAttachButton={false}
+      />
+    </Glass>
   );
 
   return (
