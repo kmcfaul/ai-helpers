@@ -1,6 +1,5 @@
 import { useState, Fragment, useRef, useEffect } from "react";
 import {
-  PageSection,
   Card,
   CardBody,
   Content,
@@ -49,7 +48,6 @@ import ThIcon from "@patternfly/react-icons/dist/esm/icons/th-icon";
 import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
 import ListIcon from "@patternfly/react-icons/dist/esm/icons/list-icon";
 import { RHServerStackIcon } from "./lib/assets/RHServerStackIcon";
-import { Glass } from "./lib/Glass";
 import { CompassFooter } from "./lib/CompassFooter";
 import { CompassMainHeader } from "./lib/CompassMainHeader.tsx";
 import { CompassContent } from "./lib/CompassContent.tsx";
